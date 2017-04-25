@@ -12,37 +12,59 @@ import java.util.logging.*;
 
 public class ConnectionToDB {
 	
-	public static void main(String[] args) {
-		String url = "jdbc:postgresql://localhost:5432/<INSERT DATABASE HERE>";
-		String user = "<INSERT USERNAME HERE>";
-		String password = "<INSERT PASSWORD HERE>";
-		Connection con = null;
+    Connection con = null;
+    ResultSet result = null;
+    String url = null;
+    String user = null;
+    String password = null;
 
-		//CONNECTING
-		try {
-			con = DriverManager.getConnection(url, user, password);
+    protected ConnectionToDB(String url, String user, String password){
 
-		} catch (SQLException ex) {
-		        Logger lgr = Logger.getLogger(ConnectionToDB.class.getName());
-    			lgr.log(Level.WARNING, ex.getMessage(), ex);
+        this.url = url;
+        this.user = user;
+        this.password = password;
 
-		}
+        try {
 
-		ConnectionToDB(con);
-	}
+            Class.forName("org.postgresql.Driver");
 
-	public static void ConnectionToDB(Connection con){
-		//RUN AN EXAMPLE QUERY
-		try {
-			Statement st = con.createStatement();
-		        String query = "select cast (exp(sin(23)*sin(23)+cos(23)*cos(23))*pi()*(exp(sin(23)*sin(23)+cos(23)*cos(23)+sin(23)*sin(23)+cos(23)*cos(23))+cos(pi()/(sin(23)*sin(23)+cos(23)*cos(23)+sin(23)*sin(23)+cos(23)*cos(23))))*(sin(23)*sin(23)+cos(23)*cos(23)+sin(23)*sin(23)+cos(23)*cos(23))/(sin(23)*sin(23)+cos(23)*cos(23)+sin(23)*sin(23)+cos(23)*cos(23)+sin(23)*sin(23)+cos(23)*cos(23)) as int) as answer";
-		        ResultSet rs = st.executeQuery(query);
-		        while (rs.next()) {
-		            	String answer = rs.getString("answer");
-		            	System.out.printf("The answer is %s!\n", answer);
-		        }
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+        } catch (ClassNotFoundException e) {
+
+            System.out.println("Something is wrong with your jdbc path!");
+            e.printStackTrace();
+            return;
+
+        }
+
+    }
+
+    protected String connect(){
+
+        try {
+            con = DriverManager.getConnection(url, user, password);
+
+        } catch (SQLException ex) {
+            Logger lgr = Logger.getLogger(ConnectionToDB.class.getName());
+            lgr.log(Level.WARNING, ex.getMessage(), ex);
+            System.out.println(ex);
+        }
+
+        if (con != null) {
+            return "Connection to database established!";
+        } else {
+            return "Failed to make connection!";
+        }
+    }
+
+
+    protected ResultSet sendDBStatement(String statement){
+        PreparedStatement prepStat = null;
+        try {
+            prepStat = con.prepareStatement(statement);
+            result = prepStat.executeQuery();
+        } catch (SQLException e) {
+        }
+
+        return result;
+    }
 }
