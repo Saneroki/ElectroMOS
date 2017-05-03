@@ -9,6 +9,14 @@ package CMS;
  *
  * @author andt
  */
-public class Browse {
-    
+//Browse is a collection of ProductContainers in different sizes.
+
+public class Browse extends Widget {
+        private int height;
+        private int width;
+    //on creation of a browser widget, size is to be defined first
+    public Browse(int width, int height){
+        this.width = width;
+        this.height = height;
+    }
 }
