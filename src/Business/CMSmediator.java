@@ -19,7 +19,7 @@ public class CMSmediator implements Mediator{
     
 
     @Override
-    public void sendData() {
+    public void sendData(String string) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -29,8 +29,8 @@ public class CMSmediator implements Mediator{
     }
 
     @Override
-    public void connectToDB(String user, String pw, String db) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void connectToDB(String user, String pw, String url) {
+        logic.connectDB(user, pw, url);
     }
 
     

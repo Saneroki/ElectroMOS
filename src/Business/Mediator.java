@@ -12,7 +12,7 @@ package Business;
 
 public interface Mediator {
     public abstract void connectToDB(String user, String pw, String db);
-    public abstract void sendData();
+    public abstract void sendData(String string);
     public abstract void getData();
     
 }

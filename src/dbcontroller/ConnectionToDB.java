@@ -18,7 +18,7 @@ public class ConnectionToDB {
     String user = null;
     String password = null;
 
-    protected ConnectionToDB(String url, String user, String password){
+    protected ConnectionToDB(String user, String password, String url){
 
         this.url = url;
         this.user = user;

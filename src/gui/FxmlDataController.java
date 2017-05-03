@@ -5,6 +5,8 @@
  */
 package gui;
 
+import Business.CMSmediator;
+import Business.Mediator;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -18,6 +20,8 @@ import javafx.scene.control.Label;
  */
 public class FxmlDataController implements Initializable {
     
+    Mediator mediator;
+    
     @FXML
     private Label label;
     
@@ -29,7 +33,10 @@ public class FxmlDataController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        mediator = new CMSmediator();
+        
+        
+        mediator.connectToDB("postgres", "Npaexmmf226", "jdbc:postgresql://10.126.115.233:5432/ElectroMOSDB");
     }    
     
 }

@@ -5,14 +5,24 @@
  */
 package Business;
 
+import dbcontroller.DBMediator;
+
 /**
  *
  * @author Marcg
  */
 public class Logic {
     
+    DBMediator dB;
+    
     public Logic(){
-        
+        dB = new DBMediator();
     }
+    
+   public void connectDB(String user, String pw, String url){
+       dB.connectToDB(user, pw, url);
+   }
+   
+   
     
 }
