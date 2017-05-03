@@ -32,6 +32,9 @@ public class CMSmediator implements Mediator{
     public void connectToDB(String user, String pw, String url) {
         logic.connectDB(user, pw, url);
     }
-
+    
+    public String sendstring(){
+        return "40";
+    }
     
 }

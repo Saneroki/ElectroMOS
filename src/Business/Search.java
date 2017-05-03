@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package CMS;
+package Business;
 
 /**
  *
  * @author andt
  */
-//container for certain products, choosen by page administrator/content administrator.
-public class productContainer {
+public class Search {
     
 }
