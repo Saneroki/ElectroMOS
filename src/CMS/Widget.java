@@ -9,6 +9,12 @@ package CMS;
  *
  * @author andt
  */
-public class Widget {
-        
+public abstract class Widget {
+    private int height;
+    private int width;
+    
+//        public Widget(int width, int height){
+//            this.height = height;
+//            this.width = width;
+//        }
 }
