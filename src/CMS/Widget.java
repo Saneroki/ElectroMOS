@@ -10,11 +10,19 @@ package CMS;
  * @author andt
  */
 public abstract class Widget {
-    private int height;
-    private int width;
-    
+
+    protected int height;
+    protected int width;
+
 //        public Widget(int width, int height){
 //            this.height = height;
 //            this.width = width;
 //        }
+    public void setHeight(int value) {
+        this.height = value;
+    }
+
+    public void setWidth(int value) {
+        this.width = value;
+    }
 }
