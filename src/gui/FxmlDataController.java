@@ -163,10 +163,10 @@ public class FxmlDataController implements Initializable {
         if (box.getValue() == null || !box.isVisible()) {
             return;
         }
-
+        /* Classes were moved to another package so this needs to change as well
         switch ((String) box.getValue()) {
             case "Insert Searchbar":
-                this.placeWidget(box, new SearchBar());
+                this.placeWidget(box, new Searchbar());
                 break;
 
             case "Insert Campaign":
@@ -181,5 +181,6 @@ public class FxmlDataController implements Initializable {
                 System.out.println("String: " + (String) box.getValue());
                 break;
         }
+        */
     }
 }

@@ -3,25 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui;
+package widgets;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
+
+
 
 /**
  *
  * @author Kristian
  */
-public class Searchbar extends HBox {
+public class Searchbar{
 
+    @FXML
     private TextField searchText;
+    @FXML
     private Button searchButton;
-    
+
     public Searchbar() {
-        searchText = new TextField("Search Product");
-        searchButton = new Button("Search");
-        
-        this.getChildren().addAll(searchText, searchButton);
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @FXML
+    private void searchAction(ActionEvent event) {
+    }
+    
 }
