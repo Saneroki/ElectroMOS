@@ -13,6 +13,8 @@ public abstract class Widget {
 
     protected int height;
     protected int width;
+    protected int xPos;
+    protected int yPos;
 
 //        public Widget(int width, int height){
 //            this.height = height;
@@ -24,5 +26,29 @@ public abstract class Widget {
 
     public void setWidth(int value) {
         this.width = value;
+    }
+
+    public void setXPos(int value) {
+        this.xPos = value;
+    }
+
+    public void setYPos(int value) {
+        this.yPos = value;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getXPos() {
+        return xPos;
+    }
+
+    public int getYPos() {
+        return yPos;
     }
 }
