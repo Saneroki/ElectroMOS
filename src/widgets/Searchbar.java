@@ -3,12 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package widgets;
+package gui;
+
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 
 /**
  *
- * @author Glenn
+ * @author Kristian
  */
-public class Searchbar {
+public class Searchbar extends HBox {
+
+    private TextField searchText;
+    private Button searchButton;
     
+    public Searchbar() {
+        searchText = new TextField("Search Product");
+        searchButton = new Button("Search");
+        
+        this.getChildren().addAll(searchText, searchButton);
+    }
 }
