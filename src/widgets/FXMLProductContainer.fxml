@@ -27,7 +27,7 @@
       </Label>
       <Label fx:id="LblSerialNumber" layoutX="53.0" layoutY="228.0" text="SerialNumber" />
       <Label layoutX="14.0" layoutY="228.0" text="S/N:" />
-      <Button fx:id="btAddToCart" layoutX="136.0" layoutY="261.0" mnemonicParsing="false" onAction="#HandleAddToCartButtonAction" text="Add To Cart">
+      <Button fx:id="btAddToCart" layoutX="136.0" layoutY="261.0" mnemonicParsing="false" onAction="#handleAddToCartButtonAction" text="Add To Cart">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
