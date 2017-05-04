@@ -72,6 +72,12 @@ public class FxmlDataController implements Initializable {
     private ChoiceBox<?> choiceBoxCenter3;
     @FXML
     private Button buttonUpdatePreview;
+    @FXML
+    private Button buttonNewLayout;
+    @FXML
+    private Button buttonEditLayout;
+    @FXML
+    private Button buttonDeleteLayoyt;
 
     private void handleButtonAction(ActionEvent event) {
     }
@@ -112,7 +118,7 @@ public class FxmlDataController implements Initializable {
     }
 
     private void fillCenterBox(ChoiceBox box) {
-
+        box.setItems(FXCollections.observableArrayList("None", "Insert Searchbar", "Insert Login Button", "Insert Campaign"));
     }
 
     private void fillBottomBox(ChoiceBox box) {
