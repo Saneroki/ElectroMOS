@@ -5,6 +5,7 @@
  */
 package gui;
 
+import widgets.Campaign;
 import Business.CMSmediator;
 import java.net.URL;
 import java.util.ResourceBundle;

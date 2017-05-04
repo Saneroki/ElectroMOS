@@ -5,6 +5,8 @@
  */
 package Business;
 
+import widgets.Widget;
+
 /**
  *
  * @author andt
