@@ -8,11 +8,12 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="ElectroMOS.jar" size="17679" download="eager" />
+    <jar href="ElectroMOS.jar" size="76349" download="eager" />
+    <jar href="lib/postgresql-9.4.1209.jar" size="686956" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="ElectroMOS" >
     <param name="requiredFXVersion" value="8.0+"/>
   </applet-desc>
-  <jfx:javafx-desc  width="800" height="600" main-class="gui.Launch"  name="ElectroMOS" />
+  <jfx:javafx-desc  width="800" height="600" main-class="guiMain.APPLICATION_Launch"  name="ElectroMOS" />
   <update check="always"/>
 </jnlp>

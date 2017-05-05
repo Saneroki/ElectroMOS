@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui;
+package guiMain;
 
 import Business.BusinessController;
-import widgets.Campaign;
+import guiWidgets.Campaign;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
