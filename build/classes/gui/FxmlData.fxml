@@ -7,7 +7,11 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -18,14 +22,6 @@
             <ScrollPane minWidth="-Infinity" prefHeight="668.0" prefWidth="1000.0" BorderPane.alignment="CENTER">
                <content>
                   <BorderPane minHeight="720.0" minWidth="1080.0" prefHeight="0.0" prefWidth="0.0">
-                     <top>
-                        <AnchorPane fx:id="pageTop" onContextMenuRequested="#contextMenuPageRequested" prefHeight="117.0" prefWidth="1080.0" BorderPane.alignment="CENTER">
-                           <children>
-                              <ChoiceBox fx:id="choiceBoxTop1" layoutX="14.0" layoutY="14.0" onMouseClicked="#onWidgetSelect" prefWidth="150.0" />
-                              <ChoiceBox fx:id="choiceBoxTop3" layoutX="893.0" layoutY="14.0" onMouseClicked="#onWidgetSelect" prefWidth="150.0" />
-                              <ChoiceBox fx:id="choiceBoxTop2" layoutX="465.0" layoutY="14.0" onMouseClicked="#onWidgetSelect" prefWidth="150.0" />
-                           </children></AnchorPane>
-                     </top>
                      <bottom>
                         <AnchorPane fx:id="pageFoot" prefHeight="67.0" prefWidth="1080.0" BorderPane.alignment="CENTER">
                            <children>
@@ -50,6 +46,26 @@
                               <ChoiceBox fx:id="choiceBoxCenter3" layoutX="14.0" layoutY="253.0" onMouseClicked="#onWidgetSelect" prefWidth="150.0" />
                            </children></AnchorPane>
                      </center>
+                     <top>
+                        <GridPane prefHeight="95.0" prefWidth="1074.0" BorderPane.alignment="CENTER">
+                          <columnConstraints>
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <ChoiceBox fx:id="choiceBoxTop1" onMouseClicked="#onWidgetSelect" prefWidth="150.0" />
+                              <ChoiceBox fx:id="choiceBoxTop3" onMouseClicked="#onWidgetSelect" prefWidth="150.0" GridPane.columnIndex="1" />
+                              <ChoiceBox fx:id="choiceBoxTop2" onMouseClicked="#onWidgetSelect" prefWidth="150.0" GridPane.columnIndex="2" />
+                              <Pane fx:id="paneTopLeft" prefHeight="200.0" prefWidth="200.0" />
+                              <Pane fx:id="PaneTopCenter" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                              <Pane fx:id="PaneTopRight" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+                           </children>
+                        </GridPane>
+                     </top>
                   </BorderPane>
                </content>
             </ScrollPane>
