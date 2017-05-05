@@ -16,15 +16,16 @@ import javafx.scene.control.TextField;
  *
  * @author Kristian
  */
-public class Searchbar{
+public class Searchbar extends Widget{
 
     @FXML
     private TextField searchText;
     @FXML
     private Button searchButton;
 
-    public Searchbar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Searchbar(int width, int height) {
+        super.width = width;
+        super.height = height;
     }
 
     @FXML
