@@ -36,7 +36,8 @@ public class ProductContainer extends Widget implements Initializable {
     @FXML
     private Label LblPrice;
 
-    public ProductContainer(int height, int width, int xPos, int yPos) {
+    public ProductContainer(int id, int height, int width, int xPos, int yPos) {
+        super.id = id;
         super.width = width;
         super.height = height;
         super.xPos = xPos;
@@ -56,7 +57,8 @@ public class ProductContainer extends Widget implements Initializable {
 
     }
 
-    public ProductContainer(String title, int serial, double price, String imgSrc, int height, int width, int xPos, int yPos) {
+    public ProductContainer(String title, int serial, double price, String imgSrc, int id, int height, int width, int xPos, int yPos) {
+        super.id = id;
         super.width = width;
         super.height = height;
         super.xPos = xPos;

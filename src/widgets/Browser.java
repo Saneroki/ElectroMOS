@@ -20,11 +20,13 @@ public class Browser extends Widget implements Initializable {
     @FXML
     private ScrollPane ScrollPane;
 
-    public Browser(int height, int width, int xPos, int yPos){
+    public Browser(int id, int height, int width, int xPos, int yPos){
+        super.id = id;
         super.width = width;
         super.height = height;
         super.xPos = xPos;
         super.yPos = yPos;
+        
     }
     
     @Override

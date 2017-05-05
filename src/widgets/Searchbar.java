@@ -24,9 +24,11 @@ public class Searchbar extends Widget {
     @FXML
     private Button searchButton;
 
-    public Searchbar(int width, int height) {
+    public Searchbar(int width, int height, int xPos, int yPos) {
         super.width = width;
         super.height = height;
+        super.xPos = xPos;
+        super.yPos = yPos;
     }
 
     @FXML
