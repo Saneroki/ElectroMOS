@@ -3,12 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Business;
+package widgets;
+
+import javafx.scene.control.Button;
 
 /**
  *
- * @author andt
+ * @author Kristian
  */
-public class Search {
+public class ButtonLogin extends Button {
     
+    public ButtonLogin() {
+        this.setText("Login");
+    }
 }

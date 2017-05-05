@@ -9,16 +9,15 @@ import java.sql.*;
 import java.util.logging.*;
 
 // java -cp postgresql-9.4-1201.jdbc4.jar:. DBtest
-
 public class ConnectionToDB {
-	
+
     Connection con = null;
     ResultSet result = null;
     String url = null;
     String user = null;
     String password = null;
 
-    protected ConnectionToDB(String user, String password, String url){
+    protected ConnectionToDB(String url, String user, String password) {
 
         this.url = url;
         this.user = user;
@@ -38,7 +37,7 @@ public class ConnectionToDB {
 
     }
 
-    protected String connect(){
+    protected String connect() {
 
         try {
             con = DriverManager.getConnection(url, user, password);
@@ -56,15 +55,25 @@ public class ConnectionToDB {
         }
     }
 
-
-    protected ResultSet sendDBStatement(String statement){
+    protected ResultSet sendDBStatement(String statement) {
         PreparedStatement prepStat = null;
         try {
             prepStat = con.prepareStatement(statement);
             result = prepStat.executeQuery();
         } catch (SQLException e) {
+            System.out.println("error occured: "+e);
         }
 
         return result;
+    }
+
+    protected void updateDBStatement(String statement) {
+        Statement stmt = null;
+        try {
+            stmt = con.createStatement();
+            stmt.executeUpdate(statement);
+            stmt.close();
+        } catch (SQLException e) {
+        }
     }
 }
