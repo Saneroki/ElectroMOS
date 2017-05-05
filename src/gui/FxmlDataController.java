@@ -5,18 +5,13 @@
  */
 package gui;
 
-import widgets.ButtonLogin;
 import widgets.Campaign;
 import Business.CMSmediator;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -44,6 +39,8 @@ public class FxmlDataController implements Initializable {
     private Button buttonCancel;
     @FXML
     private Button buttonAccept;
+    @FXML
+    private AnchorPane pageTop;
     @FXML
     private AnchorPane pageLeft;
     @FXML
@@ -77,11 +74,11 @@ public class FxmlDataController implements Initializable {
     @FXML
     private Button buttonUpdatePreview;
     @FXML
-    private Pane paneTopLeft;
+    private Button buttonNewLayout;
     @FXML
-    private Pane PaneTopCenter;
+    private Button buttonEditLayout;
     @FXML
-    private Pane PaneTopRight;
+    private Button buttonDeleteLayoyt;
 
     private void handleButtonAction(ActionEvent event) {
     }
@@ -122,7 +119,7 @@ public class FxmlDataController implements Initializable {
     }
 
     private void fillCenterBox(ChoiceBox box) {
-
+        box.setItems(FXCollections.observableArrayList("None", "Insert Searchbar", "Insert Login Button", "Insert Campaign"));
     }
 
     private void fillBottomBox(ChoiceBox box) {
@@ -172,10 +169,10 @@ public class FxmlDataController implements Initializable {
         if (box.getValue() == null || !box.isVisible()) {
             return;
         }
-        //* Classes were moved to another package so this needs to change as well
+
         switch ((String) box.getValue()) {
             case "Insert Searchbar":
-                
+                this.placeWidget(box, new SearchBar());
                 break;
 
             case "Insert Campaign":
@@ -190,7 +187,5 @@ public class FxmlDataController implements Initializable {
                 System.out.println("String: " + (String) box.getValue());
                 break;
         }
-        
     }
 }
-
