@@ -5,12 +5,8 @@
  */
 package gui;
 
-<<<<<<< HEAD
 import Business.BusinessController;
-=======
 import widgets.Campaign;
-import Business.CMSmediator;
->>>>>>> 27993d1056f664f8fb1856fd266dfd2785de8638
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -76,19 +72,12 @@ public class FxmlDataController implements Initializable {
     @FXML
     private Button buttonUpdatePreview;
     @FXML
-<<<<<<< HEAD
     private Button buttonLayoutNew;
     @FXML
     private Button buttonEditLayout;
     @FXML
     private Button buttonLayoutDelete;
-=======
-    private Button buttonNewLayout;
-    @FXML
-    private Button buttonEditLayout;
-    @FXML
-    private Button buttonDeleteLayoyt;
->>>>>>> 27993d1056f664f8fb1856fd266dfd2785de8638
+
 
     private void handleButtonAction(ActionEvent event) {
     }
@@ -222,22 +211,22 @@ public class FxmlDataController implements Initializable {
             return;
         }
 
-        switch ((String) box.getValue()) {
-            case "Insert Searchbar":
-                this.placeWidget(box, new SearchBar());
-                break;
-
-            case "Insert Campaign":
-                this.placeWidget(box, new Campaign());
-                break;
-
-            case "Insert Login Button":
-                this.placeWidget(box, new ButtonLogin());
-                break;
-
-            default:
-                System.out.println("String: " + (String) box.getValue());
-                break;
-        }
+//        switch ((String) box.getValue()) {
+//            case "Insert Searchbar":
+//                this.placeWidget(box, new SearchBar());
+//                break;
+//
+//            case "Insert Campaign":
+//                this.placeWidget(box, new Campaign());
+//                break;
+//
+//            case "Insert Login Button":
+//                this.placeWidget(box, new ButtonLogin());
+//                break;
+//
+//            default:
+//                System.out.println("String: " + (String) box.getValue());
+//                break;
+//        }
     }
 }
