@@ -5,38 +5,55 @@
  */
 package widgets;
 
+import java.io.File;
+import javafx.scene.image.Image;
+
 /**
  *
  * @author andt
  */
 public class Product {
+
     private String name;
     private int serialNumber;
     private double price;
     private String imgSrc;
-    
-    public Product(String name,  int serial, double price){
+    private Image img;
+
+    public Product(String name, int serial, double price) {
         this.name = name;
         this.serialNumber = serial;
-        this.price =  price;
+        this.price = price;
+        this.imgSrc = "0";
     }
-    public Product (String name, int serial, double price, String imgSrc){
+
+    public Product(String name, int serial, double price, String imgSrc) {
         this.name = name;
         this.serialNumber = serial;
-        this.price =  price;
-        this.imgSrc =  imgSrc;
+        this.price = price;
+        this.imgSrc = imgSrc;
+
+        try {
+            File file = new File(imgSrc);
+            img = new Image(imgSrc, 0, 150, true, false);
+        } catch (Exception e) {
+            img = new Image("src.imageNotFound.png");
+        }
     }
-    
-    public String getName(){
+
+    public String getName() {
         return name;
     }
-    public int getSerial(){
+
+    public int getSerial() {
         return serialNumber;
     }
-    public double getPrice(){
+
+    public double getPrice() {
         return price;
     }
-    public String getImgSrc(){
+
+    public String getImgSrc() {
         return imgSrc;
     }
 }

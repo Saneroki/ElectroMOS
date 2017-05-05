@@ -10,14 +10,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="300.0" prefWidth="230.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="widgets.ProductContainer">
+<AnchorPane id="AnchorPane" prefHeight="300.0" prefWidth="230.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="widgets.ProductContainer">
     <stylesheets>
         <URL value="@fxmlproductcontainer.css" />
     </stylesheets>
    <children>
       <ImageView fx:id="ImgviewProduct" fitHeight="150.0" fitWidth="192.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../replace_me.png" />
+            <Image url="@../replace_me.png" />
          </image>
       </ImageView>
       <Label fx:id="LblProductTitle" layoutX="14.0" layoutY="173.0" prefHeight="55.0" prefWidth="199.0" text="Produkt Titel">
@@ -48,7 +48,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="11.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleProductButtonAction" prefHeight="150.0" prefWidth="199.0">
+      <Button layoutX="11.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleProductButtonAction" prefHeight="150.0" prefWidth="200.0">
          <effect>
             <Shadow color="TRANSPARENT" />
          </effect>

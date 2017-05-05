@@ -12,14 +12,19 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
  *
  * @author andt
  */
-public class ProductContainer extends Widget implements Initializable{
+public class ProductContainer extends Widget implements Initializable {
 
+    private String title;
+    private int serialNumber;
+    private double price;
+    private Image img;
     @FXML
     private ImageView ImgviewProduct;
     @FXML
@@ -30,21 +35,58 @@ public class ProductContainer extends Widget implements Initializable{
     private Button btAddToCart;
     @FXML
     private Label LblPrice;
-    public ProductContainer(int heigth, int width, int xPos, int yPos){
+
+    public ProductContainer(int height, int width, int xPos, int yPos) {
+        super.width = width;
+        super.height = height;
+        super.xPos = xPos;
+        super.yPos = yPos;
+    }
+
+    public ProductContainer(String title, int serial, double price, Image img) {
+        this.title = title;
+        this.serialNumber = serial;
+        this.price = price;
+        this.img = img;
+
+        LblProductTitle.setText(this.title);
+        LblSerialNumber.setText("" + this.serialNumber);
+        LblPrice.setText("" + this.price);
+        ImgviewProduct.setImage(img);
+
+    }
+
+    public ProductContainer(String title, int serial, double price, String imgSrc, int height, int width, int xPos, int yPos) {
+        super.width = width;
+        super.height = height;
+        super.xPos = xPos;
+        super.yPos = yPos;
         
+        this.title = title;
+        this.serialNumber = serial;
+        this.price = price;
+        this.img = img;
+
+
+        LblProductTitle.setText(this.title);
+        LblSerialNumber.setText("" + this.serialNumber);
+        LblPrice.setText("" + this.price);
+        ImgviewProduct.setImage(img);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
     }
 
     @FXML
     private void handleAddToCartButtonAction(ActionEvent event) {
+        
     }
 
     @FXML
     private void handleProductButtonAction(ActionEvent event) {
+
     }
-    
+
 }

@@ -5,10 +5,31 @@
  */
 package widgets;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.ScrollPane;
+
 /**
  *
  * @author andt
  */
-public class Browser {
+public class Browser extends Widget implements Initializable {
+
+    @FXML
+    private ScrollPane ScrollPane;
+
+    public Browser(int height, int width, int xPos, int yPos){
+        super.width = width;
+        super.height = height;
+        super.xPos = xPos;
+        super.yPos = yPos;
+    }
+    
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        
+    }
     
 }
