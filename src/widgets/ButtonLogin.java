@@ -3,12 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui;
+package widgets;
+
+import javafx.scene.control.Button;
 
 /**
  *
- * @author Glenn
+ * @author Kristian
  */
-public class SystemController {
+public class ButtonLogin extends Button {
     
+    public ButtonLogin() {
+        this.setText("Login");
+    }
 }

@@ -5,11 +5,14 @@
  */
 package widgets;
 
+import javafx.scene.Node;
+
 /**
  *
  * @author andt
  */
-public abstract class Widget {
+public abstract class Widget{
+    protected int id;
     protected int height;
     protected int width;
     
