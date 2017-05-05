@@ -5,6 +5,7 @@
  */
 package gui;
 
+import Business.BusinessController;
 import Business.CMSmediator;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -30,9 +31,9 @@ import javafx.scene.layout.VBox;
  * @author Glenn
  */
 public class FxmlDataController implements Initializable {
-    
-    CMSmediator mediator;
-    
+
+    BusinessController mediator;
+
     private Label label;
     @FXML
     private Button buttonCancel;
@@ -79,8 +80,7 @@ public class FxmlDataController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.fillChoiceBoxes();
-        mediator = new CMSmediator();
-        mediator.connectToDB("postgres", "Npaexmmf226", "jdbc:postgresql://10.126.115.233:5432/ElectroMOSDB");
+        this.mediator = BusinessController.getBusinessController();
     }
 
     @FXML
@@ -90,6 +90,10 @@ public class FxmlDataController implements Initializable {
         //Check if preview button and activate
         if (button == this.buttonUpdatePreview) {
             this.refreshPreview();
+        }
+
+        if (button == this.buttonAccept) {
+            this.mediator.acceptLayout();
         }
     }
 
@@ -130,16 +134,35 @@ public class FxmlDataController implements Initializable {
         posY = box.getLayoutY();
 
         box.setVisible(false);
-        
+
         parent.getChildren().add(node);
         node.setLayoutX(posX);
         node.setLayoutY(posY);
-        
-        
+
+        //add to business
+        if (box.getParent() == pageTop) {
+            this.mediator.addWidget(node, BusinessController.Area.TOP);
+        } else if (box.getParent() == pageCenter) {
+            this.mediator.addWidget(node, BusinessController.Area.CENTER);
+        } else if (box.getParent() == pageFoot) {
+            this.mediator.addWidget(node, BusinessController.Area.BOTTOM);
+        } else {
+            this.mediator.addWidget(node, BusinessController.Area.LEFT);
+        }
+
         //on right click remove!
         node.setOnContextMenuRequested((event) -> {
             box.setVisible(true);
             ((AnchorPane) node.getParent()).getChildren().remove(node);
+            if (box.getParent() == pageTop) {
+                this.mediator.removeWidget(node, BusinessController.Area.TOP);
+            } else if (box.getParent() == pageCenter) {
+                this.mediator.removeWidget(node, BusinessController.Area.CENTER);
+            } else if (box.getParent() == pageFoot) {
+                this.mediator.removeWidget(node, BusinessController.Area.BOTTOM);
+            } else {
+                this.mediator.removeWidget(node, BusinessController.Area.LEFT);
+            }
         });
     }
 

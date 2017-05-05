@@ -16,7 +16,7 @@ public class Logic {
     DBMediator dB;
     
     public Logic(){
-        dB = new DBMediator();
+        dB = DBMediator.getMediator();
     }
     
    public void connectDB(String user, String pw, String url){
