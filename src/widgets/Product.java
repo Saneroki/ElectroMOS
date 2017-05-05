@@ -56,4 +56,7 @@ public class Product {
     public String getImgSrc() {
         return imgSrc;
     }
+    public Image getImage(){
+        return img;
+    }
 }
