@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
@@ -15,7 +20,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" minHeight="768.0" minWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.FxmlDataController">
+<AnchorPane id="AnchorPane" minHeight="768.0" minWidth="1366.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.FxmlDataController">
    <children>
       <BorderPane prefHeight="720.0" prefWidth="1080.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
@@ -83,17 +88,17 @@
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Label>
-                        <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="256.0" text="New Layout">
+                        <Button fx:id="buttonLayoutNew" mnemonicParsing="false" onAction="#buttonListener" prefHeight="31.0" prefWidth="256.0" text="New Layout">
                            <VBox.margin>
                               <Insets left="16.0" top="12.0" />
                            </VBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="256.0" text="Edit Layout">
+                        <Button fx:id="buttonEditLayout" mnemonicParsing="false" onAction="#buttonListener" prefHeight="31.0" prefWidth="256.0" text="Edit Layout">
                            <VBox.margin>
                               <Insets left="16.0" top="12.0" />
                            </VBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="256.0" text="Delete Layout">
+                        <Button fx:id="buttonLayoutDelete" mnemonicParsing="false" onAction="#buttonListener" prefHeight="31.0" prefWidth="256.0" text="Delete Layout">
                            <VBox.margin>
                               <Insets left="16.0" top="12.0" />
                            </VBox.margin>
