@@ -67,17 +67,17 @@
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Label>
-                        <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="256.0" text="New Layout">
+                        <Button fx:id="buttonLayoutNew" mnemonicParsing="false" onAction="#buttonListener" prefHeight="31.0" prefWidth="256.0" text="New Layout">
                            <VBox.margin>
                               <Insets left="16.0" top="12.0" />
                            </VBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="256.0" text="Edit Layout">
+                        <Button fx:id="buttonEditLayout" mnemonicParsing="false" onAction="#buttonListener" prefHeight="31.0" prefWidth="256.0" text="Edit Layout">
                            <VBox.margin>
                               <Insets left="16.0" top="12.0" />
                            </VBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="256.0" text="Delete Layout">
+                        <Button fx:id="buttonLayoutDelete" mnemonicParsing="false" onAction="#buttonListener" prefHeight="31.0" prefWidth="256.0" text="Delete Layout">
                            <VBox.margin>
                               <Insets left="16.0" top="12.0" />
                            </VBox.margin>

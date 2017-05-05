@@ -6,7 +6,6 @@
 package gui;
 
 import Business.BusinessController;
-import Business.CMSmediator;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -14,17 +13,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 
 /**
  *
@@ -33,6 +28,8 @@ import javafx.scene.layout.VBox;
 public class FxmlDataController implements Initializable {
 
     BusinessController mediator;
+    private LayoutSelect layoutEdit;
+    private LayoutSelect layoutDelete;
 
     private Label label;
     @FXML
@@ -73,6 +70,12 @@ public class FxmlDataController implements Initializable {
     private ChoiceBox<?> choiceBoxCenter3;
     @FXML
     private Button buttonUpdatePreview;
+    @FXML
+    private Button buttonLayoutNew;
+    @FXML
+    private Button buttonEditLayout;
+    @FXML
+    private Button buttonLayoutDelete;
 
     private void handleButtonAction(ActionEvent event) {
     }
@@ -81,6 +84,18 @@ public class FxmlDataController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         this.fillChoiceBoxes();
         this.mediator = BusinessController.getBusinessController();
+        this.layoutEdit = new LayoutSelect("Select Layout to Edit") {
+            @Override
+            public void onAccept() {
+                
+            }
+        };
+        this.layoutDelete = new LayoutSelect("Select Layout to Delete") {
+            @Override
+            public void onAccept() {
+                
+            }
+        };
     }
 
     @FXML
@@ -94,6 +109,14 @@ public class FxmlDataController implements Initializable {
 
         if (button == this.buttonAccept) {
             this.mediator.acceptLayout();
+        }
+        
+        if (button == this.buttonEditLayout) {
+            this.layoutEdit.show();
+        }
+        
+        if (button == this.buttonLayoutDelete) {
+            this.layoutDelete.show();
         }
     }
 
