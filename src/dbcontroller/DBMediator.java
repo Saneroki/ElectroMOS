@@ -18,7 +18,7 @@ import javafx.scene.Node;
  *
  * @author Marcg
  */
-public class DBMediator implements Mediator {
+public class DBMediator {
 
     private static DBMediator mediator;
 
@@ -36,14 +36,12 @@ public class DBMediator implements Mediator {
         this.connectToDB("jdbc:postgresql://10.126.115.233:5432/ElectroMOSDB", "postgres", "Npaexmmf226");
     }
 
-    @Override
     public void connectToDB(String url, String user, String pw) {
         con = new ConnectionToDB(url, user, pw);
         status = con.connect();
         System.out.println(status);
     }
 
-    @Override
     public void sendData(String string) {
         result = con.sendDBStatement(string);
     }
@@ -52,7 +50,7 @@ public class DBMediator implements Mediator {
         con.updateDBStatement(string);
     }
 
-    @Override
+
     public void getData() {
 
     }

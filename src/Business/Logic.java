@@ -11,17 +11,17 @@ import dbcontroller.DBMediator;
  *
  * @author Marcg
  */
-public class Logic {
+class Logic {
     
     DBMediator dB;
     
-    public Logic(){
+    Logic(){
         dB = DBMediator.getMediator();
     }
     
-   public void connectDB(String user, String pw, String url){
-       dB.connectToDB(user, pw, url);
-   }
+    void addPage(HashMap<Integer, String>, ){
+        
+    }
    
    
     
