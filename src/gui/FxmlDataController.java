@@ -5,13 +5,18 @@
  */
 package gui;
 
+import widgets.ButtonLogin;
 import widgets.Campaign;
 import Business.CMSmediator;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -39,8 +44,6 @@ public class FxmlDataController implements Initializable {
     private Button buttonCancel;
     @FXML
     private Button buttonAccept;
-    @FXML
-    private AnchorPane pageTop;
     @FXML
     private AnchorPane pageLeft;
     @FXML
@@ -73,6 +76,12 @@ public class FxmlDataController implements Initializable {
     private ChoiceBox<?> choiceBoxCenter3;
     @FXML
     private Button buttonUpdatePreview;
+    @FXML
+    private Pane paneTopLeft;
+    @FXML
+    private Pane PaneTopCenter;
+    @FXML
+    private Pane PaneTopRight;
 
     private void handleButtonAction(ActionEvent event) {
     }
@@ -163,10 +172,10 @@ public class FxmlDataController implements Initializable {
         if (box.getValue() == null || !box.isVisible()) {
             return;
         }
-
+        //* Classes were moved to another package so this needs to change as well
         switch ((String) box.getValue()) {
             case "Insert Searchbar":
-                this.placeWidget(box, new SearchBar());
+                
                 break;
 
             case "Insert Campaign":
@@ -181,5 +190,7 @@ public class FxmlDataController implements Initializable {
                 System.out.println("String: " + (String) box.getValue());
                 break;
         }
+        
     }
 }
+

@@ -5,13 +5,16 @@
  */
 package widgets;
 
+import javafx.scene.Node;
+
 /**
  *
  * @author andt
  */
-public abstract class Widget {
-    private int height;
-    private int width;
+public abstract class Widget{
+    protected int id;
+    protected int height;
+    protected int width;
     
 //        public Widget(int width, int height){
 //            this.height = height;
