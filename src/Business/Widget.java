@@ -1,4 +1,4 @@
-package Logic;
+package Business;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -11,13 +11,20 @@ package Logic;
  * @author Marcg
  */
 class Widgets {
+    int id;
     String desc;
     int x;
     int y;
+    int height;
+    int width;
     
-    Widgets(int x, int y, String desc){
+    Widgets(int id, int x, int y, String desc, int height, int width){
+        
+        this.id = id;
         this.x = x;
         this.y = y;
+        this.height = height;
+        this.width = width;
         this.desc = desc;
                
     }
@@ -45,6 +52,26 @@ class Widgets {
     String getDesc(){
         return desc;
     }
+    
+    void setHeight(int height){
+        this.height = height;
+    }
+    
+    void setWidth(int width){
+        this.width = width;
+    }
+    
+    int getHeight(){
+        return this.height;
+    }
+    
+    int getWidth(){
+        return this.width;
+    }
+    
+    int getID(){
+        return id;
+    }                                                   
     
     
 }
