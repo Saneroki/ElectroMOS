@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package guiMain;
+package guiWidgets;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,9 +12,9 @@ import javafx.fxml.Initializable;
 /**
  * FXML Controller class
  *
- * @author Glenn
+ * @author Kristian
  */
-public class SCENE_CTRL_PagePlaner extends Controller implements Initializable {
+public class ProductFXMLController implements Initializable {
 
     /**
      * Initializes the controller class.

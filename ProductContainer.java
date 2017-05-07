@@ -19,7 +19,7 @@ import javafx.scene.image.ImageView;
  *
  * @author andt
  */
-public class ProductContainer extends Widget implements Initializable {
+public class ProductContainer implements Initializable {
 
     private String title;
     private int serialNumber;
@@ -36,6 +36,7 @@ public class ProductContainer extends Widget implements Initializable {
     @FXML
     private Label LblPrice;
 
+    
     public ProductContainer(int height, int width, int xPos, int yPos) {
         super.width = width;
         super.height = height;

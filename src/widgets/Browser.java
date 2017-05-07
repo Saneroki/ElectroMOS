@@ -3,18 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package guiMain;
+package widgets;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ScrollPane;
 
 /**
  * FXML Controller class
  *
- * @author Glenn
+ * @author Kristian
  */
-public class SCENE_CTRL_PagePlaner extends Controller implements Initializable {
+public class Browser implements Initializable {
+
+    @FXML
+    private ScrollPane ScrollPane;
 
     /**
      * Initializes the controller class.

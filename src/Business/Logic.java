@@ -10,67 +10,75 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 
-
 /**
  *
  * @author Marcg
  */
 class Logic {
+
     HashMap<BusinessWidget, String> widgets = new HashMap<>();
     DBMediator dB;
-    
-    Logic(){
-        dB = DBMediator.getMediator();
+
+    Logic() {
     }
-    
-    String addPage(String description){
+
+    /**
+     * Returns whether or not it was successful
+     * @param url
+     * @param username
+     * @param password
+     * @return 
+     */
+    boolean loginToDatabase(String url, String username, String password) {
+        dB = DBMediator.getMediator();
+        return dB.connectToDB(url, username, password);
+    }
+
+    String addPage(String description) {
         String s = "";
         String sql = "";
         ResultSet result;
         int id = 0;
-      
-        
-        try{
-            sql = "INSERT INTO \"site\"(\"Description\")\n" +
-               "VALUES ('" + description + "')";
+
+        try {
+            sql = "INSERT INTO \"site\"(\"Description\")\n"
+                    + "VALUES ('" + description + "')";
             dB.sendData(sql);
-            
+
             sql = "SELECT \"site\".site_id FROM \"site\" WHERE \"site\".\"Description\" = '" + description + "'";
             dB.sendData(sql);
             result = dB.getResult();
             result.next();
             id = result.getInt(1);
-            
-        for(BusinessWidget w: widgets.keySet()){
-            sql = "INSERT INTO \"site_widget\"(widget_id, site_id, x, y, height, width)\n" +
-                  "VALUES (" + w.getDBID() + ", " + id + ", " + w.getXPos() + ", " + w.getYPos() + ", " + w.getHeight() + ", " + w.getWidth() + ")";
-            dB.sendData(sql);
-        }
-        
-        s = "Page added succesfully!";
-        } catch(SQLException e){
+
+            for (BusinessWidget w : widgets.keySet()) {
+                sql = "INSERT INTO \"site_widget\"(widget_id, site_id, x, y, height, width)\n"
+                        + "VALUES (" + w.getDBID() + ", " + id + ", " + w.getXPos() + ", " + w.getYPos() + ", " + w.getHeight() + ", " + w.getWidth() + ")";
+                dB.sendData(sql);
+            }
+
+            s = "Page added succesfully!";
+        } catch (SQLException e) {
             System.out.println(e);
             s = "Something went wrong!";
         }
- 
-        
+
         return s;
     }
-    
-    void addWidgetToPage(int id, int dbid, int x, int y, int height, int width, String typeName){
+
+    void addWidgetToPage(int id, int dbid, int x, int y, int height, int width, String typeName) {
         widgets.put(new BusinessWidget(height, width, x, y, id, dbid), typeName);
     }
-    
-    void clearWidgets(){
+
+    void clearWidgets() {
         widgets.clear();
     }
-    
-    void removeWidget(int id){
-        for(BusinessWidget w: widgets.keySet()){
-            if(w.getID() == id){
+
+    void removeWidget(int id) {
+        for (BusinessWidget w : widgets.keySet()) {
+            if (w.getID() == id) {
                 widgets.remove(w);
             }
         }
     }
-    
 }

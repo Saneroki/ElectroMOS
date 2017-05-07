@@ -3,18 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package guiMain;
+package guiWidgets;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 
 /**
  * FXML Controller class
  *
- * @author Glenn
+ * @author Kristian
  */
-public class SCENE_CTRL_PagePlaner extends Controller implements Initializable {
+public class CampaignFXMLController implements Initializable {
+
+    @FXML
+    private GridPane gridpane;
+    @FXML
+    private ImageView imageView;
 
     /**
      * Initializes the controller class.

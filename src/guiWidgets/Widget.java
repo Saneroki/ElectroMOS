@@ -6,60 +6,126 @@
 package guiWidgets;
 
 import javafx.scene.Node;
+import javafx.scene.layout.AnchorPane;
 
 /**
  *
  * @author andt
  */
-public abstract class Widget{
-    protected int id;
-    protected int height;
-    protected int width;
-    protected int xPos;
-    protected int yPos;
-    protected int databaseID;
+public class Widget {
 
-//        public Widget(int width, int height){
-//            this.height = height;
-//            this.width = width;
-//        }
-    public void setHeight(int value) {
-        this.height = value;
-    }
-
-    public void setWidth(int value) {
-        this.width = value;
-    }
-
-    public void setXPos(int value) {
-        this.xPos = value;
-    }
-
-    public void setYPos(int value) {
-        this.yPos = value;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getXPos() {
+    /**
+     * @return the xPos
+     */
+    public double getXPos() {
         return xPos;
     }
 
-    public int getYPos() {
+    /**
+     * @param xPos the xPos to set
+     */
+    public void setxPos(double xPos) {
+        this.xPos = xPos;
+    }
+
+    /**
+     * @return the yPos
+     */
+    public double getYPos() {
         return yPos;
     }
+
+    /**
+     * @param yPos the yPos to set
+     */
+    public void setyPos(double yPos) {
+        this.yPos = yPos;
+    }
+
+    /**
+     * @return the width
+     */
+    public double getWidth() {
+        return width;
+    }
+
+    /**
+     * @param width the width to set
+     */
+    public void setWidth(double width) {
+        this.width = width;
+    }
+
+    /**
+     * @return the height
+     */
+    public double getHeight() {
+        return height;
+    }
+
+    /**
+     * @param height the height to set
+     */
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    /**
+     * @return the ID
+     */
+    public int getID() {
+        return ID;
+    }
+
+    /**
+     * @param ID the ID to set
+     */
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    /**
+     * @return the DBID
+     */
+    public int getDBID() {
+        return DBID;
+    }
+
+    /**
+     * @param DBID the DBID to set
+     */
+    public void setDBID(int DBID) {
+        this.DBID = DBID;
+    }
+
+    private String fxmlName;
+    private Node node;
+    private double xPos, yPos, width, height;
+    private int ID, DBID;
     
-    public int getID(){
-        return id;
+    public Widget(Node node, String name) {
+        this.fxmlName = name;
+        this.node = node;
+    }
+
+    /**
+     * @return the node
+     */
+    public Node getNode() {
+        return node;
+    }
+
+    /**
+     * @return the fxmlName
+     */
+    public String getFxmlName() {
+        return fxmlName;
+    }
+
+    @Override
+    public String toString() {
+        return "Insert "+getFxmlName().split("\\.")[0];
     }
     
-    public int getDBID(){
-        return databaseID;
-    }
+    
 }
