@@ -34,15 +34,17 @@ public class BusinessController {
     }
 
 
-    private Logic logic = new Logic();
+    private Logic logic;
 
     private BusinessController() {
+        logic = new Logic();
     }
 
+    /*
     public void addWidget(Widget widget, Area area) {
         logic.addWidgetToPage(widget.getID(), widget.getDBID(), widget.getXPos(), widget.getYPos(), widget.getWidgetHeight(), widget.getWidgetWidth(), getAreaList(area));
     }
-
+    */
     public void removeWidget(Widget widget) {
         logic.removeWidget(widget.getID());
     }
@@ -65,5 +67,9 @@ public class BusinessController {
 
     public void acceptLayout(String desc) {
        logic.addPage(desc);
+    }
+    
+    public boolean connectToDB(String url, String username, String password) {
+        return this.logic.loginToDatabase(url, username, password);
     }
 }

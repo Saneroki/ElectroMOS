@@ -3,18 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package guiMain;
+package widgets;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
  *
- * @author Glenn
+ * @author Kristian
  */
-public class SCENE_CTRL_PagePlaner extends Controller implements Initializable {
+public class Searchbar implements Initializable {
+
+    @FXML
+    private TextField searchText;
+    @FXML
+    private Button searchButton;
 
     /**
      * Initializes the controller class.
@@ -23,5 +32,9 @@ public class SCENE_CTRL_PagePlaner extends Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void searchAction(ActionEvent event) {
+    }
     
 }

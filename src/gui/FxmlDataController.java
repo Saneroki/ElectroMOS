@@ -3,13 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package guiMain;
+package gui;
 
 import Business.BusinessController;
-import guiWidgets.*;
+import guiMain.Controller;
+import guiMain.LayoutSelect;
+import guiWidgets.Campaign;
+import guiWidgets.Widget;
+import guiWidgets.WidgetSelector;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,11 +33,12 @@ import javafx.scene.layout.Pane;
  *
  * @author Glenn
  */
-public class FxmlDataController implements Initializable {
+public class FxmlDataController extends Controller implements Initializable {
 
-    BusinessController mediator;
+    private BusinessController mediator;
     private LayoutSelect layoutEdit;
     private LayoutSelect layoutDelete;
+    private WidgetSelector widgetSelector;
 
     private Label label;
     @FXML
@@ -53,29 +60,29 @@ public class FxmlDataController implements Initializable {
     @FXML
     private AnchorPane pageCenter;
     @FXML
-    private ChoiceBox<?> choiceBoxTop1;
+    private ChoiceBox<Widget> choiceBoxTop1;
     @FXML
-    private ChoiceBox<?> choiceBoxTop2;
+    private ChoiceBox<Widget> choiceBoxTop2;
     @FXML
-    private ChoiceBox<?> choiceBoxTop3;
+    private ChoiceBox<Widget> choiceBoxTop3;
     @FXML
-    private ChoiceBox<?> choiceBoxLeft1;
+    private ChoiceBox<Widget> choiceBoxLeft1;
     @FXML
-    private ChoiceBox<?> choiceBoxLeft2;
+    private ChoiceBox<Widget> choiceBoxLeft2;
     @FXML
-    private ChoiceBox<?> choiceBoxLeft3;
+    private ChoiceBox<Widget> choiceBoxLeft3;
     @FXML
-    private ChoiceBox<?> choiceBoxBottom1;
+    private ChoiceBox<Widget> choiceBoxBottom1;
     @FXML
-    private ChoiceBox<?> choiceBoxBottom3;
+    private ChoiceBox<Widget> choiceBoxBottom3;
     @FXML
-    private ChoiceBox<?> choiceBoxBottom2;
+    private ChoiceBox<Widget> choiceBoxBottom2;
     @FXML
-    private ChoiceBox<?> choiceBoxCenter1;
+    private ChoiceBox<Widget> choiceBoxCenter1;
     @FXML
-    private ChoiceBox<?> choiceBoxCenter2;
+    private ChoiceBox<Widget> choiceBoxCenter2;
     @FXML
-    private ChoiceBox<?> choiceBoxCenter3;
+    private ChoiceBox<Widget> choiceBoxCenter3;
     @FXML
     private Button buttonUpdatePreview;
     @FXML
@@ -85,24 +92,24 @@ public class FxmlDataController implements Initializable {
     @FXML
     private Button buttonLayoutDelete;
 
-
     private void handleButtonAction(ActionEvent event) {
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        this.widgetSelector = new WidgetSelector();
         this.fillChoiceBoxes();
-        this.mediator = BusinessController.getBusinessController();
+
         this.layoutEdit = new LayoutSelect("Select Layout to Edit") {
             @Override
             public void onAccept() {
-                
+
             }
         };
         this.layoutDelete = new LayoutSelect("Select Layout to Delete") {
             @Override
             public void onAccept() {
-                
+
             }
         };
     }
@@ -118,11 +125,11 @@ public class FxmlDataController implements Initializable {
 
         if (button == this.buttonAccept) {
         }
-        
+
         if (button == this.buttonEditLayout) {
             this.layoutEdit.show();
         }
-        
+
         if (button == this.buttonLayoutDelete) {
             this.layoutDelete.show();
         }
@@ -139,7 +146,13 @@ public class FxmlDataController implements Initializable {
     }
 
     private void fillUpperBox(ChoiceBox box) {
-        box.setItems(FXCollections.observableArrayList("None", "Insert Searchbar", "Insert Login Button", "Insert Campaign"));
+        
+        ArrayList<Widget> options = new ArrayList();
+        for(Widget widget : widgetSelector.getWidgets()) {
+            options.add(widget);
+        }
+        
+        box.setItems(FXCollections.observableArrayList(options));
     }
 
     private void fillLeftBox(ChoiceBox box) {
@@ -158,18 +171,17 @@ public class FxmlDataController implements Initializable {
     private void contextMenuPageRequested(ContextMenuEvent event) {
     }
 
-    private void placeWidget(ChoiceBox box, Widget widget) {
-        AnchorPane parent = ((AnchorPane) box.getParent());
+    private void placeWidget(ChoiceBox box, Node node) {
+        Pane parent = ((Pane) box.getParent());
         double posX, posY;
         posX = box.getLayoutX();
         posY = box.getLayoutY();
 
-       
-
-        parent.getChildren().setAll(widget);
-        widget.setLayoutX(posX);
-        widget.setLayoutY(posY);
+        box.setVisible(false);
         
+        parent.getChildren().add(node);
+        node.setLayoutX(posX);
+        node.setLayoutY(posY);
 
         //add to business
 //        if (box.getParent() == pageTop) {
@@ -219,7 +231,21 @@ public class FxmlDataController implements Initializable {
             
         }
 
-        
+        this.placeWidget(box, ((Widget) box.getValue()).getNode());
+        System.out.println("Widget selected: "+box.getValue());
     }
-    
+
+    /**
+     * @return the mediator
+     */
+    public BusinessController getMediator() {
+        return mediator;
+    }
+
+    /**
+     * @param mediator the mediator to set
+     */
+    public void setMediator(BusinessController mediator) {
+        this.mediator = mediator;
+    }
 }

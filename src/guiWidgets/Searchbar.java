@@ -17,17 +17,12 @@ import guiWidgets.Widget;
  *
  * @author Kristian
  */
-public class Searchbar extends Widget {
+public class Searchbar {
 
     @FXML
     private TextField searchText;
     @FXML
     private Button searchButton;
-
-    public Searchbar(int width, int height) {
-        super.width = width;
-        super.height = height;
-    }
 
     @FXML
     private void searchAction(ActionEvent event) {

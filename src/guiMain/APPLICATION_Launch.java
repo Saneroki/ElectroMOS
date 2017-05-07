@@ -5,7 +5,11 @@
  */
 package guiMain;
 
+import guiWidgets.WidgetSelector;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,28 +22,45 @@ import javafx.stage.Stage;
  * @author Glenn
  */
 public class APPLICATION_Launch extends Application {
-    
+
+    private Stage stage;
+    private HashMap<Page, Controller> pages;
+    private WidgetSelector widgetSelector;
+
     @Override
     public void start(Stage stage) throws Exception {
+        this.pages = new HashMap();
+        this.stage = stage;
         stage.setTitle("Main Page");
-        
-        stage.setScene(createScene(loadMainPane()));
+        stage.setScene(this.loadLayout(Page.MAINPAGE));
         stage.show();
     }
-    
-    
-    private Pane loadMainPane() throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        
-        Pane mainPane = (Pane) loader.load(
-                getClass().getResourceAsStream("FxmlData.fxml"));
-        
-        return mainPane;
+
+    public void setSceneFromString(Page page) {
+        try {
+            stage.setScene(this.loadLayout(page));
+        } catch (IOException ex) {
+            System.out.println("Unable to open file");
+            Logger.getLogger(APPLICATION_Launch.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
-    private Scene createScene (Pane pane) {
-        Scene scene = new Scene(pane);
+
+    private Scene loadLayout(Page fxmlName) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+
+        Parent root = loader.load(
+                getClass().getResourceAsStream(fxmlName.toString()));
         
+        Controller mainCtrl = loader.getController();
+
+        this.pages.put(fxmlName, mainCtrl);
+        
+        mainCtrl.setPageSwitcher(this);
+        Scene scene = new Scene(root);
+        /*
+        PageNavigator.setMainController(mainCtrl);
+        PageNavigator.loadContent(PageNavigator.MAINPAGEFXML);
+         */
         return scene;
     }
 
@@ -49,5 +70,16 @@ public class APPLICATION_Launch extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
+    public void changeStageTitle(String name) {
+        this.stage.setTitle(name);
+    }
+
+    /**
+     * @param page
+     * @return the pages
+     */
+    public Controller getController(Page page) {
+        return pages.get(page);
+    }
 }
