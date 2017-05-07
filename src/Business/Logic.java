@@ -10,12 +10,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 
+
 /**
  *
  * @author Marcg
  */
 class Logic {
-    HashMap<Widgets, String> widgets = new HashMap<>();
+    HashMap<BusinessWidget, String> widgets = new HashMap<>();
     DBMediator dB;
     
     Logic(){
@@ -40,9 +41,9 @@ class Logic {
             result.next();
             id = result.getInt(1);
             
-        for(Widget w: widgets.keySet()){
+        for(BusinessWidget w: widgets.keySet()){
             sql = "INSERT INTO \"site_widget\"(widget_id, site_id, x, y, height, width)\n" +
-                  "VALUES (" + w.getID() + ", " + id + ", " + w.getX() + ", " + w.getY() + ", " + w.getHeight() + ", " + w.getWidth() + ")";
+                  "VALUES (" + w.getDBID() + ", " + id + ", " + w.getXPos() + ", " + w.getYPos() + ", " + w.getHeight() + ", " + w.getWidth() + ")";
             dB.sendData(sql);
         }
         
@@ -56,13 +57,20 @@ class Logic {
         return s;
     }
     
-    void addWidgetToPage(int id, String desc, int x, int y, int height, int width, String typeName){
-        widgets.put(new Widget(id, desc, x, y, height, width), typeName);
+    void addWidgetToPage(int id, int dbid, int x, int y, int height, int width, String typeName){
+        widgets.put(new BusinessWidget(height, width, x, y, id, dbid), typeName);
     }
     
     void clearWidgets(){
         widgets.clear();
     }
     
+    void removeWidget(int id){
+        for(BusinessWidget w: widgets.keySet()){
+            if(w.getID() == id){
+                widgets.remove(w);
+            }
+        }
+    }
     
 }

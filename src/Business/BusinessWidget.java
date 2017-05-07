@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package guiWidgets;
+package Business;
 
+import guiWidgets.*;
 import javafx.scene.Node;
 
 /**
  *
  * @author andt
  */
-public abstract class Widget{
+class BusinessWidget{
     protected int id;
     protected int height;
     protected int width;
@@ -19,47 +20,52 @@ public abstract class Widget{
     protected int yPos;
     protected int databaseID;
 
-//        public Widget(int width, int height){
-//            this.height = height;
-//            this.width = width;
-//        }
-    public void setHeight(int value) {
+    public BusinessWidget(int width, int height, int x, int y, int id, int dbid){
+        this.height = height;
+        this.width = width;
+        this.xPos = x;
+        this.yPos = y;
+        this.id = id;
+        this.databaseID = dbid;
+    }
+      
+    void setHeight(int value) {
         this.height = value;
     }
 
-    public void setWidth(int value) {
+    void setWidth(int value) {
         this.width = value;
     }
 
-    public void setXPos(int value) {
+    void setXPos(int value) {
         this.xPos = value;
     }
 
-    public void setYPos(int value) {
+    void setYPos(int value) {
         this.yPos = value;
     }
 
-    public int getHeight() {
+    int getHeight() {
         return height;
     }
 
-    public int getWidth() {
+    int getWidth() {
         return width;
     }
 
-    public int getXPos() {
+    int getXPos() {
         return xPos;
     }
 
-    public int getYPos() {
+    int getYPos() {
         return yPos;
     }
     
-    public int getID(){
+    int getID(){
         return id;
     }
     
-    public int getDBID(){
+    int getDBID(){
         return databaseID;
     }
 }

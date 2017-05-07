@@ -62,55 +62,6 @@ public class DBMediator {
     public ResultSet getResult() {
         return result;
     }
-
-    /**
-     * Make changes to the database
-     *
-     * @param widgets
-     * @param siteId
-     * @param area
-     * @return whether or not it was successful.
-     */
-    public boolean commitChanges(List<Node> widgets, int siteId, Area area) throws SQLException {
-        //Update class descriptions
-        for (Node node : widgets) {
-            this.updateExistingClassesRegistered(node);
-        }
-
-        String string = "INSERT INTO ";
-        switch (area) {
-            case BOTTOM:
-
-                break;
-            case LEFT:
-
-                break;
-            case TOP:
-
-                break;
-            case CENTER:
-
-                break;
-        }
-        return true;
-    }
-
-    private void updateExistingClassesRegistered(Node node) throws SQLException {
-        sendData("SELECT name FROM widget WHERE name = '" + node.getClass().toString()+"';");
-
-        //if it exists return
-        if (result.next()) {
-            System.out.println("result: "+result.getString("name"));
-            result.close();
-            return;
-        }
-        
-        
-        //if it doesn't exist, create
-        sendData("INSERT INTO widget(name)\n"
-                + "VALUES\n ('" + node.getClass().toString() + "');");
-        result.close();
-    }
     
     public static void main(String[] args) {
         DBMediator databaseMediator = DBMediator.getMediator();
