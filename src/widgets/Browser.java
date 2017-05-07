@@ -5,13 +5,16 @@
  */
 package widgets;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TitledPane;
+import javafx.scene.layout.Pane;
 
 /**
  *
@@ -26,7 +29,7 @@ public class Browser extends Widget implements Initializable {
     @FXML
     private TitledPane titlePane;
 
-    public Browser(int id, int height, int width, int xPos, int yPos) {
+    public Browser(int id, int height, int width, int xPos, int yPos) throws IOException {
         super.id = id;
         super.width = width;
         super.height = height;
@@ -40,6 +43,12 @@ public class Browser extends Widget implements Initializable {
         //there needs to be a stock that holds all the products fetched from the PIM
         productList = new ArrayList<>();
         productContainerList = new ArrayList<>();
+        
+        //i have no idea if this will work...
+//        for(ProductContainer p: productContainerList){
+//            Pane newPane = FXMLLoader.load(getClass().getResource("FXMLProductContainer.fxml"));
+//            
+//        }
         
         
     }
