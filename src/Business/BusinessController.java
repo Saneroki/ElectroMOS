@@ -6,8 +6,7 @@
 package Business;
 
 import dbcontroller.DBMediator;
-//import gui.ButtonLogin;
-//import gui.SearchBar;
+import guiWidgets.Widget;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,56 +33,37 @@ public class BusinessController {
         return controller;
     }
 
-    private ArrayList<Node> widgetsLeft;
-    private ArrayList<Node> widgetsCenter;
-    private ArrayList<Node> widgetsTop;
-    private ArrayList<Node> widgetsBottom;
 
-    private DBMediator databaseMediator;
+    private Logic logic = new Logic();
 
     private BusinessController() {
-        widgetsLeft = new ArrayList();
-        widgetsTop = new ArrayList();
-        widgetsCenter = new ArrayList();
-        widgetsBottom = new ArrayList();
-
-        databaseMediator = DBMediator.getMediator();
     }
 
-    public void addWidget(Node widget, Area area) {
-        getAreaList(area).add(widget);
+    public void addWidget(Widget widget, Area area) {
+        logic.addWidgetToPage(widget.getID(), widget.getDBID(), widget.getXPos(), widget.getYPos(), widget.getHeight(), widget.getWidth(), getAreaList(area));
     }
 
-    public void removeWidget(Node widget, Area area) {
-        getAreaList(area).remove(widget);
+    public void removeWidget(Widget widget) {
+        logic.removeWidget(widget.getID());
     }
 
-    private List<Node> getAreaList(Area area) {
+    private String getAreaList(Area area) {
         switch (area) {
             case BOTTOM:
-                return this.widgetsBottom;
+                return "bottom";
             case LEFT:
-                return this.widgetsLeft;
+                return "left";
             case CENTER:
-                return this.widgetsCenter;
+                return "center";
             case TOP:
-                return this.widgetsTop;
-
+                return "top";
             default:
                 break;
         }
         return null;
     }
 
-    public void acceptLayout() {
-        try {
-            this.databaseMediator.commitChanges(widgetsTop, 0, Area.TOP);
-            this.databaseMediator.commitChanges(widgetsCenter, 0, Area.CENTER);
-            this.databaseMediator.commitChanges(widgetsLeft, 0, Area.LEFT);
-            this.databaseMediator.commitChanges(widgetsBottom, 0, Area.BOTTOM);
-        } catch (SQLException ex) {
-            System.out.println("An error occured updating the layout");
-            Logger.getLogger(BusinessController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public void acceptLayout(String desc) {
+       logic.addPage(desc);
     }
 }
