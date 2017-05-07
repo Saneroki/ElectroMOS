@@ -110,7 +110,6 @@ public class FxmlDataController implements Initializable {
         }
 
         if (button == this.buttonAccept) {
-            this.mediator.acceptLayout();
         }
         
         if (button == this.buttonEditLayout) {
@@ -166,13 +165,9 @@ public class FxmlDataController implements Initializable {
 
         //add to business
         if (box.getParent() == pageTop) {
-            this.mediator.addWidget(node, BusinessController.Area.TOP);
         } else if (box.getParent() == pageCenter) {
-            this.mediator.addWidget(node, BusinessController.Area.CENTER);
         } else if (box.getParent() == pageFoot) {
-            this.mediator.addWidget(node, BusinessController.Area.BOTTOM);
         } else {
-            this.mediator.addWidget(node, BusinessController.Area.LEFT);
         }
 
         //on right click remove!
@@ -180,13 +175,9 @@ public class FxmlDataController implements Initializable {
             box.setVisible(true);
             ((AnchorPane) node.getParent()).getChildren().remove(node);
             if (box.getParent() == pageTop) {
-                this.mediator.removeWidget(node, BusinessController.Area.TOP);
             } else if (box.getParent() == pageCenter) {
-                this.mediator.removeWidget(node, BusinessController.Area.CENTER);
             } else if (box.getParent() == pageFoot) {
-                this.mediator.removeWidget(node, BusinessController.Area.BOTTOM);
             } else {
-                this.mediator.removeWidget(node, BusinessController.Area.LEFT);
             }
         });
     }
