@@ -57,8 +57,8 @@ class Logic {
         return s;
     }
     
-    void addWidgetToPage(int id, int dbid, int x, int y, int height, int width, String typeName){
-        widgets.put(new BusinessWidget(height, width, x, y, id, dbid), typeName);
+    void addWidgetToPage(int id, int dbid, double x, double y, int height, int width, String typeName){
+        widgets.put(new BusinessWidget(height, width, (int) x, (int) y, id, dbid), typeName);
     }
     
     void clearWidgets(){

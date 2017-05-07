@@ -5,19 +5,21 @@
  */
 package guiWidgets;
 
-import javafx.scene.Node;
+import javafx.scene.layout.AnchorPane;
+
+
 
 /**
  *
  * @author andt
  */
-public abstract class Widget{
+public abstract class Widget extends AnchorPane{
     protected int id;
     protected int height;
     protected int width;
     protected int xPos;
     protected int yPos;
-    protected int databaseID;
+    protected int widgetID;
 
 //        public Widget(int width, int height){
 //            this.height = height;
@@ -39,11 +41,11 @@ public abstract class Widget{
         this.yPos = value;
     }
 
-    public int getHeight() {
+    public int getWidgetHeight() {
         return height;
     }
 
-    public int getWidth() {
+    public int getWidgetWidth() {
         return width;
     }
 
@@ -60,6 +62,6 @@ public abstract class Widget{
     }
     
     public int getDBID(){
-        return databaseID;
+        return widgetID;
     }
 }

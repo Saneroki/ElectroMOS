@@ -6,21 +6,22 @@
 package guiMain;
 
 import Business.BusinessController;
-import guiWidgets.Campaign;
+import guiWidgets.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
 /**
  *
@@ -43,6 +44,12 @@ public class FxmlDataController implements Initializable {
     private AnchorPane pageLeft;
     @FXML
     private AnchorPane pageFoot;
+    @FXML
+    private Pane paneTopLeft;
+    @FXML 
+    private Pane PaneTopCenter;
+    @FXML
+    private Pane PaneTopRight;
     @FXML
     private AnchorPane pageCenter;
     @FXML
@@ -151,35 +158,36 @@ public class FxmlDataController implements Initializable {
     private void contextMenuPageRequested(ContextMenuEvent event) {
     }
 
-    private void placeWidget(ChoiceBox box, Node node) {
+    private void placeWidget(ChoiceBox box, Widget widget) {
         AnchorPane parent = ((AnchorPane) box.getParent());
         double posX, posY;
         posX = box.getLayoutX();
         posY = box.getLayoutY();
 
-        box.setVisible(false);
+       
 
-        parent.getChildren().add(node);
-        node.setLayoutX(posX);
-        node.setLayoutY(posY);
+        parent.getChildren().setAll(widget);
+        widget.setLayoutX(posX);
+        widget.setLayoutY(posY);
+        
 
         //add to business
-        if (box.getParent() == pageTop) {
-        } else if (box.getParent() == pageCenter) {
-        } else if (box.getParent() == pageFoot) {
-        } else {
-        }
+//        if (box.getParent() == pageTop) {
+//        } else if (box.getParent() == pageCenter) {
+//        } else if (box.getParent() == pageFoot) {
+//        } else {
+//        }
 
         //on right click remove!
-        node.setOnContextMenuRequested((event) -> {
-            box.setVisible(true);
-            ((AnchorPane) node.getParent()).getChildren().remove(node);
-            if (box.getParent() == pageTop) {
-            } else if (box.getParent() == pageCenter) {
-            } else if (box.getParent() == pageFoot) {
-            } else {
-            }
-        });
+//        node.setOnContextMenuRequested((event) -> {
+//            box.setVisible(true);
+//            ((AnchorPane) node.getParent()).getChildren().remove(node);
+//            if (box.getParent() == pageTop) {
+//            } else if (box.getParent() == pageCenter) {
+//            } else if (box.getParent() == pageFoot) {
+//            } else {
+//            }
+//        });
     }
 
     private void refreshPreview() {
@@ -201,23 +209,17 @@ public class FxmlDataController implements Initializable {
         if (box.getValue() == null || !box.isVisible()) {
             return;
         }
+        
+        switch(box.getValue().toString()){
+            case "Insert Searchbar":
+                placeWidget(box, new Searchbar(10, 10));
+                break;
+            default:
+                break;
+            
+        }
 
-//        switch ((String) box.getValue()) {
-//            case "Insert Searchbar":
-//                this.placeWidget(box, new SearchBar());
-//                break;
-//
-//            case "Insert Campaign":
-//                this.placeWidget(box, new Campaign());
-//                break;
-//
-//            case "Insert Login Button":
-//                this.placeWidget(box, new ButtonLogin());
-//                break;
-//
-//            default:
-//                System.out.println("String: " + (String) box.getValue());
-//                break;
-//        }
+        
     }
+    
 }

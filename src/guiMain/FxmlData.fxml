@@ -20,7 +20,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" minHeight="768.0" minWidth="1366.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.FxmlDataController">
+<AnchorPane id="AnchorPane" minHeight="768.0" minWidth="1366.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="guiMain.FxmlDataController">
    <children>
       <BorderPane prefHeight="720.0" prefWidth="1080.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
@@ -62,12 +62,21 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <ChoiceBox fx:id="choiceBoxTop1" onMouseClicked="#onWidgetSelect" prefWidth="150.0" />
-                              <ChoiceBox fx:id="choiceBoxTop3" onMouseClicked="#onWidgetSelect" prefWidth="150.0" GridPane.columnIndex="1" />
-                              <ChoiceBox fx:id="choiceBoxTop2" onMouseClicked="#onWidgetSelect" prefWidth="150.0" GridPane.columnIndex="2" />
-                              <Pane fx:id="paneTopLeft" prefHeight="200.0" prefWidth="200.0" />
-                              <Pane fx:id="PaneTopCenter" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
-                              <Pane fx:id="PaneTopRight" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <ChoiceBox fx:id="choiceBoxTop1" layoutX="105.0" layoutY="25.0" onMouseClicked="#onWidgetSelect" prefWidth="150.0" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                 <children>
+                                    <ChoiceBox fx:id="choiceBoxTop3" layoutX="105.0" layoutY="25.0" onMouseClicked="#onWidgetSelect" prefWidth="150.0" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+                                 <children>
+                                    <ChoiceBox fx:id="choiceBoxTop2" layoutX="105.0" layoutY="25.0" onMouseClicked="#onWidgetSelect" prefWidth="150.0" />
+                                 </children>
+                              </AnchorPane>
                            </children>
                         </GridPane>
                      </top>

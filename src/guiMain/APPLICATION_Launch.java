@@ -32,12 +32,7 @@ public class APPLICATION_Launch extends Application {
         FXMLLoader loader = new FXMLLoader();
         
         Pane mainPane = (Pane) loader.load(
-                getClass().getResourceAsStream(PageNavigator.MAINPAGEFXML));
-        
-        SCENE_CTRL_MainPage mainCtrl = loader.getController();
-        
-        PageNavigator.setMainController(mainCtrl);
-        PageNavigator.loadContent(PageNavigator.MAINPAGEFXML);
+                getClass().getResourceAsStream("FxmlData.fxml"));
         
         return mainPane;
     }
