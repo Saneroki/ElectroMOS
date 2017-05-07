@@ -18,9 +18,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -51,6 +51,12 @@ public class FxmlDataController extends Controller implements Initializable {
     private AnchorPane pageLeft;
     @FXML
     private AnchorPane pageFoot;
+    @FXML
+    private Pane paneTopLeft;
+    @FXML 
+    private Pane PaneTopCenter;
+    @FXML
+    private Pane PaneTopRight;
     @FXML
     private AnchorPane pageCenter;
     @FXML
@@ -178,22 +184,22 @@ public class FxmlDataController extends Controller implements Initializable {
         node.setLayoutY(posY);
 
         //add to business
-        if (box.getParent() == pageTop) {
-        } else if (box.getParent() == pageCenter) {
-        } else if (box.getParent() == pageFoot) {
-        } else {
-        }
+//        if (box.getParent() == pageTop) {
+//        } else if (box.getParent() == pageCenter) {
+//        } else if (box.getParent() == pageFoot) {
+//        } else {
+//        }
 
         //on right click remove!
-        node.setOnContextMenuRequested((event) -> {
-            box.setVisible(true);
-            ((Pane) node.getParent()).getChildren().remove(node);
-            if (box.getParent() == pageTop) {
-            } else if (box.getParent() == pageCenter) {
-            } else if (box.getParent() == pageFoot) {
-            } else {
-            }
-        });
+//        node.setOnContextMenuRequested((event) -> {
+//            box.setVisible(true);
+//            ((AnchorPane) node.getParent()).getChildren().remove(node);
+//            if (box.getParent() == pageTop) {
+//            } else if (box.getParent() == pageCenter) {
+//            } else if (box.getParent() == pageFoot) {
+//            } else {
+//            }
+//        });
     }
 
     private void refreshPreview() {
@@ -214,6 +220,15 @@ public class FxmlDataController extends Controller implements Initializable {
     private void refreshWidget(ChoiceBox box) {
         if (box.getValue() == null || !box.isVisible()) {
             return;
+        }
+        
+        switch(box.getValue().toString()){
+            case "Insert Searchbar":
+                placeWidget(box, new Searchbar(10, 10));
+                break;
+            default:
+                break;
+            
         }
 
         this.placeWidget(box, ((Widget) box.getValue()).getNode());
