@@ -68,6 +68,7 @@ class Logic {
 
         return id;
     }
+<<<<<<< HEAD
 
     void updateWidgets(int siteID) {
         try {
@@ -137,6 +138,11 @@ class Logic {
         BusinessWidget newWidget = new BusinessWidget(height, width, x, y, id, dbid);
         newWidget.setWidgetFxmlName(fxmlName);
         widgets.put(newWidget, typeName);
+=======
+    
+    void addWidgetToPage(int id, int dbid, double x, double y, int height, int width, String typeName){
+        widgets.put(new BusinessWidget(height, width, (int) x, (int) y, id, dbid), typeName);
+>>>>>>> ec2678f31a256920b95bf6ee57f45dd222ff918b
     }
 
     void clearWidgets() {
