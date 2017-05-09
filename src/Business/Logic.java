@@ -72,13 +72,19 @@ class Logic {
     void updateWidgets(int siteID) {
         try {
             updateFxmlNames();
+            //delete all widgets from last
+            sendUpdate("DELETE FROM site_widget WHERE site_id = "+siteID+";");
+            
+            //insert widgets
             String string = "INSERT INTO site_widget(widget_id, site_id, x, y)"
-                    + "VALUES";
+                    + "VALUES\n";
             for (BusinessWidget widget : widgets.keySet()) {
-                string += "('" + widget.widgetID + "', '" + siteID + "', '" + widget.getXPos() + "', '" + widget.getYPos() + "')\n";
+                string += "('" + widget.widgetID + "', '" + siteID + "', '" + widget.getXPos() + "', '" + widget.getYPos() + "'),";
             }
+            string = string.substring(0, string.length()-1);
             string += ";";
             sendUpdate(string);
+            
         } catch (SQLException ex) {
             System.out.println(ex);
             Logger.getLogger(Logic.class.getName()).log(Level.SEVERE, null, ex);

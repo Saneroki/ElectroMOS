@@ -7,6 +7,7 @@ package gui;
 
 import Business.BusinessController;
 import guiMain.Controller;
+import guiMain.DialogCreateLayout;
 import guiMain.LayoutSelect;
 import guiWidgets.Campaign;
 import guiWidgets.Widget;
@@ -23,6 +24,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -94,6 +96,7 @@ public class FxmlDataController extends Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         this.widgetSelector = new WidgetSelector();
         this.fillChoiceBoxes();
 
@@ -121,7 +124,7 @@ public class FxmlDataController extends Controller implements Initializable {
         }
 
         if (button == this.buttonAccept) {
-            mediator.acceptLayout("MyTestPage");
+            mediator.acceptLayout("FrontPage");
         }
 
         if (button == this.buttonEditLayout) {
@@ -130,6 +133,10 @@ public class FxmlDataController extends Controller implements Initializable {
 
         if (button == this.buttonLayoutDelete) {
             this.layoutDelete.show();
+        }
+        
+        if (button == this.buttonLayoutNew) {
+            new DialogCreateLayout().showAndWait();
         }
     }
 
@@ -141,6 +148,15 @@ public class FxmlDataController extends Controller implements Initializable {
         fillUpperBox(this.choiceBoxTop1);
         fillUpperBox(this.choiceBoxTop2);
         fillUpperBox(this.choiceBoxTop3);
+        fillUpperBox(this.choiceBoxBottom1);
+        fillUpperBox(this.choiceBoxBottom2);
+        fillUpperBox(this.choiceBoxBottom3);
+        fillUpperBox(this.choiceBoxCenter1);
+        fillUpperBox(this.choiceBoxCenter2);
+        fillUpperBox(this.choiceBoxCenter3);
+        fillUpperBox(this.choiceBoxLeft1);
+        fillUpperBox(this.choiceBoxLeft2);
+        fillUpperBox(this.choiceBoxLeft3);
     }
 
     private void fillUpperBox(ChoiceBox box) {
@@ -171,7 +187,7 @@ public class FxmlDataController extends Controller implements Initializable {
 
     private void placeWidget(ChoiceBox box, Widget widget) {
         Node node = widget.getNode();
-        
+
         Pane parent = ((Pane) box.getParent());
         double posX, posY;
         posX = box.getLayoutX();
@@ -184,7 +200,7 @@ public class FxmlDataController extends Controller implements Initializable {
         node.setLayoutY(posY);
 
         mediator.addWidget(widget, BusinessController.Area.TOP);
-        
+
         //add to business
         if (box.getParent() == pageTop) {
         } else if (box.getParent() == pageCenter) {

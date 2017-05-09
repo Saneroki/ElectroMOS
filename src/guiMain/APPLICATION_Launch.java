@@ -31,7 +31,7 @@ public class APPLICATION_Launch extends Application {
     public void start(Stage stage) throws Exception {
         this.pages = new HashMap();
         this.stage = stage;
-        stage.setTitle("Main Page");
+        stage.setTitle("Main Page");        
         stage.setScene(this.loadLayout(Page.MAINPAGE));
         stage.show();
     }
@@ -39,6 +39,7 @@ public class APPLICATION_Launch extends Application {
     public void setSceneFromString(Page page) {
         try {
             stage.setScene(this.loadLayout(page));
+            stage.centerOnScreen();
         } catch (IOException ex) {
             System.out.println("Unable to open file");
             Logger.getLogger(APPLICATION_Launch.class.getName()).log(Level.SEVERE, null, ex);

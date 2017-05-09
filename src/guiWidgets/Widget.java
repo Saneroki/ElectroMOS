@@ -15,10 +15,39 @@ import javafx.scene.layout.AnchorPane;
 public class Widget {
 
     /**
-     * @return the xPos
+     * @return the local position of x
      */
     public int getXPos() {
+        xPos = getTotalX();
         return (int) xPos;
+    }
+
+    /**
+     * Used for getting the total value for the whole scene and node.
+     * @return 
+     */
+    private double getTotalY() {
+        Node currentNode = node;
+        double totalValue = node.getLayoutY();
+        while (currentNode.getParent().getParent() != null) {
+            currentNode = currentNode.getParent();
+            totalValue += currentNode.getLayoutY();
+        }
+        return totalValue;
+    }
+
+    /**
+     * Used for getting the total value for the whole scene and node.
+     * @return 
+     */
+    private double getTotalX() {
+        Node currentNode = node;
+        double totalValue = node.getLayoutX();
+        while (currentNode.getParent().getParent() != null) {
+            currentNode = currentNode.getParent();
+            totalValue += currentNode.getLayoutX();
+        }
+        return totalValue;
     }
 
     /**
@@ -32,6 +61,7 @@ public class Widget {
      * @return the yPos
      */
     public int getYPos() {
+        yPos = getTotalY();
         return (int) yPos;
     }
 
@@ -102,7 +132,7 @@ public class Widget {
     private Node node;
     private double xPos, yPos, width, height;
     private int ID, DBID;
-    
+
     public Widget(Node node, String name) {
         this.fxmlName = name;
         this.node = node;
@@ -124,8 +154,7 @@ public class Widget {
 
     @Override
     public String toString() {
-        return "Insert "+getFxmlName().split("\\.")[0];
+        return "Insert " + getFxmlName().split("\\.")[0];
     }
-    
-    
+
 }
