@@ -25,11 +25,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-<<<<<<< HEAD
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-=======
->>>>>>> ec2678f31a256920b95bf6ee57f45dd222ff918b
+
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -219,7 +217,7 @@ public class FxmlDataController extends Controller implements Initializable {
 //        }
 
         //on right click remove!
-<<<<<<< HEAD
+
         node.setOnContextMenuRequested((event) -> {
             box.setVisible(true);
             ((Pane) node.getParent()).getChildren().remove(node);
@@ -230,17 +228,7 @@ public class FxmlDataController extends Controller implements Initializable {
             } else {
             }
         });
-=======
-//        node.setOnContextMenuRequested((event) -> {
-//            box.setVisible(true);
-//            ((AnchorPane) node.getParent()).getChildren().remove(node);
-//            if (box.getParent() == pageTop) {
-//            } else if (box.getParent() == pageCenter) {
-//            } else if (box.getParent() == pageFoot) {
-//            } else {
-//            }
-//        });
->>>>>>> ec2678f31a256920b95bf6ee57f45dd222ff918b
+
     }
 
     private void refreshPreview() {
@@ -263,14 +251,7 @@ public class FxmlDataController extends Controller implements Initializable {
             return;
         }
         
-        switch(box.getValue().toString()){
-            case "Insert Searchbar":
-                placeWidget(box, new Searchbar(10, 10));
-                break;
-            default:
-                break;
-            
-        }
+        
 
         try {
             this.placeWidget(box, this.widgetSelector.getWidget(((Widget) box.getValue()).getFxmlName()));
