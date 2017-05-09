@@ -9,6 +9,8 @@ import dbcontroller.DBMediator;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -24,17 +26,18 @@ class Logic {
 
     /**
      * Returns whether or not it was successful
+     *
      * @param url
      * @param username
      * @param password
-     * @return 
+     * @return
      */
     boolean loginToDatabase(String url, String username, String password) {
         dB = DBMediator.getMediator();
         return dB.connectToDB(url, username, password);
     }
 
-    String addPage(String description) {
+    int addPage(String description) {
         String s = "";
         String sql = "";
         ResultSet result;
@@ -63,11 +66,71 @@ class Logic {
             s = "Something went wrong!";
         }
 
-        return s;
+        return id;
     }
 
-    void addWidgetToPage(int id, int dbid, int x, int y, int height, int width, String typeName) {
-        widgets.put(new BusinessWidget(height, width, x, y, id, dbid), typeName);
+    void updateWidgets(int siteID) {
+        try {
+            updateFxmlNames();
+            String string = "INSERT INTO site_widget(widget_id, site_id, x, y)"
+                    + "VALUES";
+            for (BusinessWidget widget : widgets.keySet()) {
+                string += "('" + widget.widgetID + "', '" + siteID + "', '" + widget.getXPos() + "', '" + widget.getYPos() + "')\n";
+            }
+            string += ";";
+            sendUpdate(string);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            Logger.getLogger(Logic.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    void updateFxmlNames() throws SQLException {
+        for (BusinessWidget widget : widgets.keySet()) {
+            ResultSet result = sendUpdate("SELECT id FROM widget WHERE widget_name = " + "'" + widget.getWidgetFxmlName() + "'");
+            if (!result.next()) {
+                sendUpdate("INSERT INTO widget(widget_name) VALUES ('" + widget.getWidgetFxmlName() + "');");
+            }
+        }
+
+        //update ids on widget
+        for (BusinessWidget widget : widgets.keySet()) {
+            ResultSet result = sendUpdate("SELECT id FROM widget WHERE widget_name = " + "'" + widget.getWidgetFxmlName() + "'");
+            result.next();
+            widget.widgetID = result.getInt("id");
+        }
+    }
+
+    /**
+     * Returns resultset
+     *
+     * @param sql
+     * @return
+     */
+    ResultSet sendUpdate(String sql) {
+        dB.sendData(sql);
+        return dB.getResult();
+    }
+
+    int getPage(String description) {
+        try {
+            dB.sendData("SELECT \"site\".site_id FROM \"site\" WHERE \"site\".\"Description\" = '" + description + "'");
+            ResultSet result = dB.getResult();
+            if (result == null) {
+                return -1;
+            }
+            result.next();
+            return result.getInt(1);
+        } catch (SQLException ex) {
+            Logger.getLogger(Logic.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
+    }
+
+    void addWidgetToPage(int id, int dbid, int x, int y, int height, int width, String fxmlName, String typeName) {
+        BusinessWidget newWidget = new BusinessWidget(height, width, x, y, id, dbid);
+        newWidget.setWidgetFxmlName(fxmlName);
+        widgets.put(newWidget, typeName);
     }
 
     void clearWidgets() {

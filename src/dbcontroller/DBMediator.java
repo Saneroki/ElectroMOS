@@ -32,7 +32,7 @@ public final class DBMediator {
         System.out.println(canConnect ? "The connection was successfully established!" : "En error occured, trying to connect to the database..");
         return canConnect;
     }
-    
+
     public boolean hasConnection() {
         return this.con.con != null;
     }

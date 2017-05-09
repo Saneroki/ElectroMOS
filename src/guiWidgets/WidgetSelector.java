@@ -29,7 +29,7 @@ public class WidgetSelector {
 
     public WidgetSelector() {
         this.widgets = new ArrayList();
-        
+
         try {
             this.updateWidgets();
         } catch (IOException ex) {
@@ -47,40 +47,40 @@ public class WidgetSelector {
         ArrayList<String> returnStrings = new ArrayList();
 
         for (File file : directory.listFiles()) {
-            
+
             String extension = file.toString().split("\\.")[1];
-            if(extension.equals(fileExtensionWanted)) {
+            if (extension.equals(fileExtensionWanted)) {
                 returnStrings.add(file.getName());
             }
         }
         return returnStrings;
     }
-    
+
     private void loadAll(ArrayList<String> paths) throws IOException {
-        for(String string : paths) {
-            this.loadWidget(string);
+        for (String string : paths) {
+            this.saveWidget(string);
         }
     }
+
+    public void saveWidget(String fileName) throws IOException {
+        this.widgets.add(getWidget(fileName));
+    }
     
-    private void loadWidget(String fileName) throws IOException {
+    public Widget getWidget(String fileName) throws IOException {
         FXMLLoader loader = new FXMLLoader();
 
         Node root = FXMLLoader.load(getClass().getResource(fileName));
-        
-        System.out.println("Class name: "+root.getClass().getSimpleName());
-        
-        
-        
-        this.getWidgets().add(new Widget(root, fileName));
-    }
 
+        return new Widget(root, fileName);
+    }
     /**
      * @return the widgets
      */
     public ArrayList<Widget> getWidgets() {
         return widgets;
     }
-    
+
+    /*
     public Widget getWidget(String name) {
         for(Widget widget : widgets) {
             if(name == null ? widget.getFxmlName() == null : name.equals(widget.getFxmlName())) {
@@ -89,4 +89,5 @@ public class WidgetSelector {
         }
         return null;
     }
+     */
 }

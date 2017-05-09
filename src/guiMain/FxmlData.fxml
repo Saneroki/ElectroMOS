@@ -48,9 +48,21 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <ChoiceBox fx:id="choiceBoxTop1" onMouseClicked="#onWidgetSelect" prefWidth="150.0" />
-                              <ChoiceBox fx:id="choiceBoxTop3" onMouseClicked="#onWidgetSelect" prefWidth="150.0" GridPane.columnIndex="1" />
-                              <ChoiceBox fx:id="choiceBoxTop2" onMouseClicked="#onWidgetSelect" prefWidth="150.0" GridPane.columnIndex="2" />
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <ChoiceBox fx:id="choiceBoxTop1" layoutX="105.0" layoutY="33.0" onMouseClicked="#onWidgetSelect" prefWidth="150.0" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+                                 <children>
+                                    <ChoiceBox fx:id="choiceBoxTop2" layoutX="105.0" layoutY="32.0" onMouseClicked="#onWidgetSelect" prefWidth="150.0" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+                                 <children>
+                                    <ChoiceBox fx:id="choiceBoxTop3" layoutX="147.0" layoutY="40.0" onMouseClicked="#onWidgetSelect" prefWidth="150.0" />
+                                 </children>
+                              </AnchorPane>
                            </children>
                         </GridPane>
                      </top>

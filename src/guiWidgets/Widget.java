@@ -17,8 +17,8 @@ public class Widget {
     /**
      * @return the xPos
      */
-    public double getXPos() {
-        return xPos;
+    public int getXPos() {
+        return (int) xPos;
     }
 
     /**
@@ -31,8 +31,8 @@ public class Widget {
     /**
      * @return the yPos
      */
-    public double getYPos() {
-        return yPos;
+    public int getYPos() {
+        return (int) yPos;
     }
 
     /**
@@ -45,8 +45,8 @@ public class Widget {
     /**
      * @return the width
      */
-    public double getWidth() {
-        return width;
+    public int getWidth() {
+        return (int) width;
     }
 
     /**
@@ -59,8 +59,8 @@ public class Widget {
     /**
      * @return the height
      */
-    public double getHeight() {
-        return height;
+    public int getHeight() {
+        return (int) height;
     }
 
     /**

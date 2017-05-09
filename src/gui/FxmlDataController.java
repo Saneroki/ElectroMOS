@@ -11,9 +11,12 @@ import guiMain.LayoutSelect;
 import guiWidgets.Campaign;
 import guiWidgets.Widget;
 import guiWidgets.WidgetSelector;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -118,6 +121,7 @@ public class FxmlDataController extends Controller implements Initializable {
         }
 
         if (button == this.buttonAccept) {
+            mediator.acceptLayout("MyTestPage");
         }
 
         if (button == this.buttonEditLayout) {
@@ -140,12 +144,12 @@ public class FxmlDataController extends Controller implements Initializable {
     }
 
     private void fillUpperBox(ChoiceBox box) {
-        
+
         ArrayList<Widget> options = new ArrayList();
-        for(Widget widget : widgetSelector.getWidgets()) {
+        for (Widget widget : widgetSelector.getWidgets()) {
             options.add(widget);
         }
-        
+
         box.setItems(FXCollections.observableArrayList(options));
     }
 
@@ -165,18 +169,22 @@ public class FxmlDataController extends Controller implements Initializable {
     private void contextMenuPageRequested(ContextMenuEvent event) {
     }
 
-    private void placeWidget(ChoiceBox box, Node node) {
+    private void placeWidget(ChoiceBox box, Widget widget) {
+        Node node = widget.getNode();
+        
         Pane parent = ((Pane) box.getParent());
         double posX, posY;
         posX = box.getLayoutX();
         posY = box.getLayoutY();
 
         box.setVisible(false);
-        
+
         parent.getChildren().add(node);
         node.setLayoutX(posX);
         node.setLayoutY(posY);
 
+        mediator.addWidget(widget, BusinessController.Area.TOP);
+        
         //add to business
         if (box.getParent() == pageTop) {
         } else if (box.getParent() == pageCenter) {
@@ -189,6 +197,7 @@ public class FxmlDataController extends Controller implements Initializable {
             box.setVisible(true);
             ((Pane) node.getParent()).getChildren().remove(node);
             if (box.getParent() == pageTop) {
+                mediator.removeWidget(widget);
             } else if (box.getParent() == pageCenter) {
             } else if (box.getParent() == pageFoot) {
             } else {
@@ -216,8 +225,12 @@ public class FxmlDataController extends Controller implements Initializable {
             return;
         }
 
-        this.placeWidget(box, ((Widget) box.getValue()).getNode());
-        System.out.println("Widget selected: "+box.getValue());
+        try {
+            this.placeWidget(box, this.widgetSelector.getWidget(((Widget) box.getValue()).getFxmlName()));
+        } catch (IOException ex) {
+            Logger.getLogger(FxmlDataController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("Widget selected: " + box.getValue());
     }
 
     /**
