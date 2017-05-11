@@ -25,10 +25,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-<<<<<<< HEAD:src/guiMain/FxmlDataController.java
-
-=======
->>>>>>> 3c37eb3e05fd78b92ab4528107c9e84ef0962bf1:src/gui/FxmlDataController.java
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 
@@ -44,8 +40,6 @@ import javafx.scene.layout.Pane;
  *
  * @author Glenn
  */
-
-
 public class FxmlDataController extends Controller implements Initializable {
 
     private BusinessController mediator;
@@ -202,18 +196,13 @@ public class FxmlDataController extends Controller implements Initializable {
         node.setLayoutY(posY);
 
         mediator.addWidget(widget, BusinessController.Area.TOP);
-
         //add to business
-//        if (box.getParent() == pageTop) {
-//        } else if (box.getParent() == pageCenter) {
-//        } else if (box.getParent() == pageFoot) {
-//        } else {
-//        }
+        //        if (box.getParent() == pageTop) {
+        //        } else if (box.getParent() == pageCenter) {
+        //        } else if (box.getParent() == pageFoot) {
+        //        } else {
+        //        }
         //on right click remove!
-<<<<<<< HEAD:src/guiMain/FxmlDataController.java
-=======
-
->>>>>>> 3c37eb3e05fd78b92ab4528107c9e84ef0962bf1:src/gui/FxmlDataController.java
         node.setOnContextMenuRequested((event) -> {
             box.setVisible(true);
             ((Pane) node.getParent()).getChildren().remove(node);
@@ -224,18 +213,15 @@ public class FxmlDataController extends Controller implements Initializable {
             } else {
             }
         });
-<<<<<<< HEAD:src/guiMain/FxmlDataController.java
-        //        node.setOnContextMenuRequested((event) -> {
-        //            box.setVisible(true);
-        //            ((AnchorPane) node.getParent()).getChildren().remove(node);
-        //            if (box.getParent() == pageTop) {
-        //            } else if (box.getParent() == pageCenter) {
-        //            } else if (box.getParent() == pageFoot) {
-        //            } else {
-        //            }
-        //        });
-=======
->>>>>>> 3c37eb3e05fd78b92ab4528107c9e84ef0962bf1:src/gui/FxmlDataController.java
+                //        node.setOnContextMenuRequested((event) -> {
+                //            box.setVisible(true);
+                //            ((AnchorPane) node.getParent()).getChildren().remove(node);
+                //            if (box.getParent() == pageTop) {
+                //            } else if (box.getParent() == pageCenter) {
+                //            } else if (box.getParent() == pageFoot) {
+                //            } else {
+                //            }
+                //        });
 
     }
 
@@ -258,9 +244,7 @@ public class FxmlDataController extends Controller implements Initializable {
         if (box.getValue() == null || !box.isVisible()) {
             return;
         }
-<<<<<<< HEAD:src/guiMain/FxmlDataController.java
-
-        /*
+                /*
         switch (box.getValue().toString()) {
             case "Insert Searchbar":
                 placeWidget(box, new Searchbar(10, 10));
@@ -269,11 +253,7 @@ public class FxmlDataController extends Controller implements Initializable {
                 break;
 
         }
-        */
-=======
-        
-        
->>>>>>> 3c37eb3e05fd78b92ab4528107c9e84ef0962bf1:src/gui/FxmlDataController.java
+                 */
 
         try {
             this.placeWidget(box, this.widgetSelector.getWidget(((Widget) box.getValue()).getFxmlName()));

@@ -68,10 +68,6 @@ class Logic {
 
         return id;
     }
-<<<<<<< HEAD:src/business/Logic.java
-=======
-
->>>>>>> 3c37eb3e05fd78b92ab4528107c9e84ef0962bf1:src/Business/Logic.java
 
     void updateWidgets(int siteID) {
         try {
@@ -88,10 +84,8 @@ class Logic {
             string = string.substring(0, string.length() - 1);
             string += ";";
             sendUpdate(string);
-
-        } catch (SQLException ex) {
-            System.out.println(ex);
-            Logger.getLogger(Logic.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            System.out.println("Exception:\n"+e);
         }
     }
 
@@ -141,14 +135,10 @@ class Logic {
         BusinessWidget newWidget = new BusinessWidget(height, width, x, y, id, dbid);
         newWidget.setWidgetFxmlName(fxmlName);
         widgets.put(newWidget, typeName);
-<<<<<<< HEAD:src/business/Logic.java
     }
 
     void addWidgetToPage(int id, int dbid, double x, double y, int height, int width, String typeName) {
         widgets.put(new BusinessWidget(height, width, (int) x, (int) y, id, dbid), typeName);
-=======
-
->>>>>>> 3c37eb3e05fd78b92ab4528107c9e84ef0962bf1:src/Business/Logic.java
     }
 
     void clearWidgets() {
