@@ -47,12 +47,16 @@ public class WidgetSelector {
         ArrayList<String> returnStrings = new ArrayList();
 
         for (File file : directory.listFiles()) {
+            
+            String[] extString = file.toString().split("\\.");
 
-            String extension = file.toString().split("\\.")[1];
+            String extension = extString[extString.length-1];
             if (extension.equals(fileExtensionWanted)) {
                 returnStrings.add(file.getName());
+                
             }
         }
+        
         return returnStrings;
     }
 
