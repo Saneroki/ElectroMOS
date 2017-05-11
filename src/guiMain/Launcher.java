@@ -21,7 +21,7 @@ import javafx.stage.Stage;
  *
  * @author Glenn
  */
-public class APPLICATION_Launch extends Application {
+public class Launcher extends Application {
 
     private Stage stage;
     private HashMap<Page, Controller> pages;
@@ -42,7 +42,7 @@ public class APPLICATION_Launch extends Application {
             stage.centerOnScreen();
         } catch (IOException ex) {
             System.out.println("Unable to open file");
-            Logger.getLogger(APPLICATION_Launch.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Launcher.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

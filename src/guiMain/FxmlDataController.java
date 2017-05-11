@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui;
+package guiMain;
 
-import Business.BusinessController;
+import business.BusinessController;
 import guiMain.Controller;
 import guiMain.DialogCreateLayout;
-import guiMain.LayoutSelect;
+import guiMain.LayoutSelector;
 import guiWidgets.Campaign;
 import guiWidgets.Widget;
 import guiWidgets.WidgetSelector;
@@ -25,11 +25,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-<<<<<<< HEAD
+
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-=======
->>>>>>> ec2678f31a256920b95bf6ee57f45dd222ff918b
+
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -42,11 +41,13 @@ import javafx.scene.layout.Pane;
  *
  * @author Glenn
  */
+
+
 public class FxmlDataController extends Controller implements Initializable {
 
     private BusinessController mediator;
-    private LayoutSelect layoutEdit;
-    private LayoutSelect layoutDelete;
+    private LayoutSelector layoutEdit;
+    private LayoutSelector layoutDelete;
     private WidgetSelector widgetSelector;
 
     private Label label;
@@ -62,7 +63,7 @@ public class FxmlDataController extends Controller implements Initializable {
     private AnchorPane pageFoot;
     @FXML
     private Pane paneTopLeft;
-    @FXML 
+    @FXML
     private Pane PaneTopCenter;
     @FXML
     private Pane PaneTopRight;
@@ -106,17 +107,17 @@ public class FxmlDataController extends Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         this.widgetSelector = new WidgetSelector();
         this.fillChoiceBoxes();
 
-        this.layoutEdit = new LayoutSelect("Select Layout to Edit") {
+        this.layoutEdit = new LayoutSelector("Select Layout to Edit") {
             @Override
             public void onAccept() {
 
             }
         };
-        this.layoutDelete = new LayoutSelect("Select Layout to Delete") {
+        this.layoutDelete = new LayoutSelector("Select Layout to Delete") {
             @Override
             public void onAccept() {
 
@@ -144,7 +145,7 @@ public class FxmlDataController extends Controller implements Initializable {
         if (button == this.buttonLayoutDelete) {
             this.layoutDelete.show();
         }
-        
+
         if (button == this.buttonLayoutNew) {
             new DialogCreateLayout().showAndWait();
         }
@@ -155,21 +156,21 @@ public class FxmlDataController extends Controller implements Initializable {
     }
 
     private void fillChoiceBoxes() {
-        fillUpperBox(this.choiceBoxTop1);
-        fillUpperBox(this.choiceBoxTop2);
-        fillUpperBox(this.choiceBoxTop3);
-        fillUpperBox(this.choiceBoxBottom1);
-        fillUpperBox(this.choiceBoxBottom2);
-        fillUpperBox(this.choiceBoxBottom3);
-        fillUpperBox(this.choiceBoxCenter1);
-        fillUpperBox(this.choiceBoxCenter2);
-        fillUpperBox(this.choiceBoxCenter3);
-        fillUpperBox(this.choiceBoxLeft1);
-        fillUpperBox(this.choiceBoxLeft2);
-        fillUpperBox(this.choiceBoxLeft3);
+        giveChoiceBoxAllOptions(this.choiceBoxTop1);
+        giveChoiceBoxAllOptions(this.choiceBoxTop2);
+        giveChoiceBoxAllOptions(this.choiceBoxTop3);
+        giveChoiceBoxAllOptions(this.choiceBoxBottom1);
+        giveChoiceBoxAllOptions(this.choiceBoxBottom2);
+        giveChoiceBoxAllOptions(this.choiceBoxBottom3);
+        giveChoiceBoxAllOptions(this.choiceBoxCenter1);
+        giveChoiceBoxAllOptions(this.choiceBoxCenter2);
+        giveChoiceBoxAllOptions(this.choiceBoxCenter3);
+        giveChoiceBoxAllOptions(this.choiceBoxLeft1);
+        giveChoiceBoxAllOptions(this.choiceBoxLeft2);
+        giveChoiceBoxAllOptions(this.choiceBoxLeft3);
     }
 
-    private void fillUpperBox(ChoiceBox box) {
+    private void giveChoiceBoxAllOptions(ChoiceBox box) {
 
         ArrayList<Widget> options = new ArrayList();
         for (Widget widget : widgetSelector.getWidgets()) {
@@ -177,18 +178,6 @@ public class FxmlDataController extends Controller implements Initializable {
         }
 
         box.setItems(FXCollections.observableArrayList(options));
-    }
-
-    private void fillLeftBox(ChoiceBox box) {
-        box.setItems(FXCollections.observableArrayList("None", "Insert Searchbar", "Insert Login Button", "Insert Campaign"));
-    }
-
-    private void fillCenterBox(ChoiceBox box) {
-        box.setItems(FXCollections.observableArrayList("None", "Insert Searchbar", "Insert Login Button", "Insert Campaign"));
-    }
-
-    private void fillBottomBox(ChoiceBox box) {
-
     }
 
     @FXML
@@ -217,9 +206,7 @@ public class FxmlDataController extends Controller implements Initializable {
 //        } else if (box.getParent() == pageFoot) {
 //        } else {
 //        }
-
         //on right click remove!
-<<<<<<< HEAD
         node.setOnContextMenuRequested((event) -> {
             box.setVisible(true);
             ((Pane) node.getParent()).getChildren().remove(node);
@@ -230,17 +217,16 @@ public class FxmlDataController extends Controller implements Initializable {
             } else {
             }
         });
-=======
-//        node.setOnContextMenuRequested((event) -> {
-//            box.setVisible(true);
-//            ((AnchorPane) node.getParent()).getChildren().remove(node);
-//            if (box.getParent() == pageTop) {
-//            } else if (box.getParent() == pageCenter) {
-//            } else if (box.getParent() == pageFoot) {
-//            } else {
-//            }
-//        });
->>>>>>> ec2678f31a256920b95bf6ee57f45dd222ff918b
+        //        node.setOnContextMenuRequested((event) -> {
+        //            box.setVisible(true);
+        //            ((AnchorPane) node.getParent()).getChildren().remove(node);
+        //            if (box.getParent() == pageTop) {
+        //            } else if (box.getParent() == pageCenter) {
+        //            } else if (box.getParent() == pageFoot) {
+        //            } else {
+        //            }
+        //        });
+
     }
 
     private void refreshPreview() {
@@ -262,15 +248,17 @@ public class FxmlDataController extends Controller implements Initializable {
         if (box.getValue() == null || !box.isVisible()) {
             return;
         }
-        
-        switch(box.getValue().toString()){
+
+        /*
+        switch (box.getValue().toString()) {
             case "Insert Searchbar":
                 placeWidget(box, new Searchbar(10, 10));
                 break;
             default:
                 break;
-            
+
         }
+        */
 
         try {
             this.placeWidget(box, this.widgetSelector.getWidget(((Widget) box.getValue()).getFxmlName()));

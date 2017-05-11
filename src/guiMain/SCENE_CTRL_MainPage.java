@@ -5,7 +5,7 @@
  */
 package guiMain;
 
-import Business.BusinessController;
+import business.BusinessController;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -58,7 +58,7 @@ public class SCENE_CTRL_MainPage extends Controller implements Initializable {
                 b.showAndWait();
             } else {
                 this.getPageSwitcher().setSceneFromString(Page.PAGEPLANNER);
-                gui.FxmlDataController layoutController = (gui.FxmlDataController) this.getPageSwitcher().getController(Page.PAGEPLANNER);
+                guiMain.FxmlDataController layoutController = (guiMain.FxmlDataController) this.getPageSwitcher().getController(Page.PAGEPLANNER);
                 layoutController.setMediator(controller);
             }
         }

@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Business;
+package business;
 
-import dbcontroller.DBMediator;
+import persistence.DBMediator;
 import guiWidgets.Widget;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -40,12 +40,10 @@ public class BusinessController {
     }
 
     public void addWidget(Widget widget, Area area) {
-<<<<<<< HEAD
+
         logic.addWidgetToPage(widget.getID(), widget.getDBID(), widget.getXPos(), widget.getYPos(), widget.getHeight(), widget.getWidth(), widget.getFxmlName(), getAreaList(area));
         
-=======
-        logic.addWidgetToPage(widget.getID(), widget.getDBID(), widget.getXPos(), widget.getYPos(), widget.getWidgetHeight(), widget.getWidgetWidth(), getAreaList(area));
->>>>>>> ec2678f31a256920b95bf6ee57f45dd222ff918b
+        //logic.addWidgetToPage(widget.getID(), widget.getDBID(), widget.getXPos(), widget.getYPos(), widget.getWidgetHeight(), widget.getWidgetWidth(), getAreaList(area));
     }
 
     public void removeWidget(Widget widget) {
@@ -72,7 +70,7 @@ public class BusinessController {
         int pageID = logic.getPage(desc);
         if (pageID == -1) {
             System.out.println("Page doesn't exists - creates it");
-            logic.addPage(desc);
+            pageID = logic.addPage(desc);
         } else {
             System.out.println("Page exists - loaded");
         }

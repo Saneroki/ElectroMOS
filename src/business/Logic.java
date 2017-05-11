@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Business;
+package business;
 
-import dbcontroller.DBMediator;
+import persistence.DBMediator;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -68,24 +68,23 @@ class Logic {
 
         return id;
     }
-<<<<<<< HEAD
 
     void updateWidgets(int siteID) {
         try {
             updateFxmlNames();
             //delete all widgets from last
-            sendUpdate("DELETE FROM site_widget WHERE site_id = "+siteID+";");
-            
+            sendUpdate("DELETE FROM site_widget WHERE site_id = " + siteID + ";");
+
             //insert widgets
             String string = "INSERT INTO site_widget(widget_id, site_id, x, y)"
                     + "VALUES\n";
             for (BusinessWidget widget : widgets.keySet()) {
                 string += "('" + widget.widgetID + "', '" + siteID + "', '" + widget.getXPos() + "', '" + widget.getYPos() + "'),";
             }
-            string = string.substring(0, string.length()-1);
+            string = string.substring(0, string.length() - 1);
             string += ";";
             sendUpdate(string);
-            
+
         } catch (SQLException ex) {
             System.out.println(ex);
             Logger.getLogger(Logic.class.getName()).log(Level.SEVERE, null, ex);
@@ -138,11 +137,10 @@ class Logic {
         BusinessWidget newWidget = new BusinessWidget(height, width, x, y, id, dbid);
         newWidget.setWidgetFxmlName(fxmlName);
         widgets.put(newWidget, typeName);
-=======
-    
-    void addWidgetToPage(int id, int dbid, double x, double y, int height, int width, String typeName){
+    }
+
+    void addWidgetToPage(int id, int dbid, double x, double y, int height, int width, String typeName) {
         widgets.put(new BusinessWidget(height, width, (int) x, (int) y, id, dbid), typeName);
->>>>>>> ec2678f31a256920b95bf6ee57f45dd222ff918b
     }
 
     void clearWidgets() {

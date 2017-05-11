@@ -5,6 +5,7 @@
  */
 package guiWidgets;
 
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 
 /**
@@ -13,7 +14,16 @@ import javafx.scene.control.Button;
  */
 public class ButtonLogin extends Widget {
     
-    public ButtonLogin() {
-        
+    /**
+     *
+     */
+
+    public ButtonLogin(Node node, String name) {
+        super(node, name);
     }
+    
+    /**
+     *
+     */
+    
 }

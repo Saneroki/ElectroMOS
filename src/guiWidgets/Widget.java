@@ -5,16 +5,22 @@
  */
 package guiWidgets;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.Node;
-import javafx.scene.layout.AnchorPane;
-
-
 
 /**
  *
  * @author andt
  */
-public class Widget {
+public class Widget implements Serializable {
 
     /**
      * @return the local position of x
@@ -26,7 +32,8 @@ public class Widget {
 
     /**
      * Used for getting the total value for the whole scene and node.
-     * @return 
+     *
+     * @return
      */
     private double getTotalY() {
         Node currentNode = node;
@@ -40,7 +47,8 @@ public class Widget {
 
     /**
      * Used for getting the total value for the whole scene and node.
-     * @return 
+     *
+     * @return
      */
     private double getTotalX() {
         Node currentNode = node;
@@ -134,6 +142,7 @@ public class Widget {
     private Node node;
     private double xPos, yPos, width, height;
     private int ID, DBID;
+    private String fxmlCode;
 
     public Widget(Node node, String name) {
         this.fxmlName = name;
@@ -158,5 +167,4 @@ public class Widget {
     public String toString() {
         return "Insert " + getFxmlName().split("\\.")[0];
     }
-
 }

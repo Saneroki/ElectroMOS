@@ -22,11 +22,11 @@ import javafx.stage.Stage;
  *
  * @author Kristian
  */
-public abstract class LayoutSelect extends Stage {
+public abstract class LayoutSelector extends Stage {
 
     private Scene scene;
 
-    public LayoutSelect(String title) {
+    public LayoutSelector(String title) {
         this.setTitle(title);
         this.setResizable(false);
         this.initialize();

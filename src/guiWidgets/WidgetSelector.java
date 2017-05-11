@@ -5,18 +5,13 @@
  */
 package guiWidgets;
 
-import guiMain.Controller;
-import guiMain.Page;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 
 /**
  *
@@ -47,8 +42,10 @@ public class WidgetSelector {
         ArrayList<String> returnStrings = new ArrayList();
 
         for (File file : directory.listFiles()) {
-
-            String extension = file.toString().split("\\.")[1];
+            String[] extString = file.toString().split("\\.");
+            if(extString.length == 0) continue; //if directory
+            
+            String extension = extString[extString.length-1];
             if (extension.equals(fileExtensionWanted)) {
                 returnStrings.add(file.getName());
             }
@@ -66,7 +63,7 @@ public class WidgetSelector {
         this.widgets.add(getWidget(fileName));
     }
     
-    public Widget getWidget(String fileName) throws IOException {
+    public Widget getWidget(String fileName) throws IOException {        
         FXMLLoader loader = new FXMLLoader();
 
         Node root = FXMLLoader.load(getClass().getResource(fileName));
