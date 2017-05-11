@@ -43,7 +43,11 @@ public class BusinessController {
 
         logic.addWidgetToPage(widget.getID(), widget.getDBID(), widget.getXPos(), widget.getYPos(), widget.getHeight(), widget.getWidth(), widget.getFxmlName(), getAreaList(area));
         
+<<<<<<< HEAD:src/business/BusinessController.java
         //logic.addWidgetToPage(widget.getID(), widget.getDBID(), widget.getXPos(), widget.getYPos(), widget.getWidgetHeight(), widget.getWidgetWidth(), getAreaList(area));
+=======
+
+>>>>>>> 3c37eb3e05fd78b92ab4528107c9e84ef0962bf1:src/Business/BusinessController.java
     }
 
     public void removeWidget(Widget widget) {

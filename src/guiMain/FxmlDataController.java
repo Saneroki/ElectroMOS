@@ -25,7 +25,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+<<<<<<< HEAD:src/guiMain/FxmlDataController.java
 
+=======
+>>>>>>> 3c37eb3e05fd78b92ab4528107c9e84ef0962bf1:src/gui/FxmlDataController.java
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 
@@ -207,6 +210,10 @@ public class FxmlDataController extends Controller implements Initializable {
 //        } else {
 //        }
         //on right click remove!
+<<<<<<< HEAD:src/guiMain/FxmlDataController.java
+=======
+
+>>>>>>> 3c37eb3e05fd78b92ab4528107c9e84ef0962bf1:src/gui/FxmlDataController.java
         node.setOnContextMenuRequested((event) -> {
             box.setVisible(true);
             ((Pane) node.getParent()).getChildren().remove(node);
@@ -217,6 +224,7 @@ public class FxmlDataController extends Controller implements Initializable {
             } else {
             }
         });
+<<<<<<< HEAD:src/guiMain/FxmlDataController.java
         //        node.setOnContextMenuRequested((event) -> {
         //            box.setVisible(true);
         //            ((AnchorPane) node.getParent()).getChildren().remove(node);
@@ -226,6 +234,8 @@ public class FxmlDataController extends Controller implements Initializable {
         //            } else {
         //            }
         //        });
+=======
+>>>>>>> 3c37eb3e05fd78b92ab4528107c9e84ef0962bf1:src/gui/FxmlDataController.java
 
     }
 
@@ -248,6 +258,7 @@ public class FxmlDataController extends Controller implements Initializable {
         if (box.getValue() == null || !box.isVisible()) {
             return;
         }
+<<<<<<< HEAD:src/guiMain/FxmlDataController.java
 
         /*
         switch (box.getValue().toString()) {
@@ -259,6 +270,10 @@ public class FxmlDataController extends Controller implements Initializable {
 
         }
         */
+=======
+        
+        
+>>>>>>> 3c37eb3e05fd78b92ab4528107c9e84ef0962bf1:src/gui/FxmlDataController.java
 
         try {
             this.placeWidget(box, this.widgetSelector.getWidget(((Widget) box.getValue()).getFxmlName()));
