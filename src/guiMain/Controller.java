@@ -11,17 +11,17 @@ package guiMain;
  */
 public abstract class Controller {
 
-    private Launcher pageSwitcher;
+    private Launcher sceneSwitcher;
     
-    public void setPageSwitcher(Launcher pageSwitcher) {
-        this.pageSwitcher = pageSwitcher;
+    public void setSceneSwitcher(Launcher sceneSwitcher) {
+        this.sceneSwitcher = sceneSwitcher;
     }
 
     /**
      * @return the pageSwitcher
      */
-    public Launcher getPageSwitcher() {
-        return pageSwitcher;
+    public Launcher getSceneSwitcher() {
+        return sceneSwitcher;
     }
 
 }

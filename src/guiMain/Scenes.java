@@ -18,6 +18,16 @@ public enum Scenes {
     private Scenes(String string) {
         this.pageName = string;
     }
+    
+    public String getSceneTitle(){
+        String title = null;
+        if (this.pageName.equals(LOGINTODB.toString())) {
+            title = "Login";
+        } else if (this.pageName.equals(PAGEPLANNER.toString())) {
+            title = "Page planer";
+        }
+        return title;
+    }
 
     @Override
     public String toString() {

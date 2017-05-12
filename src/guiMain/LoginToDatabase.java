@@ -19,7 +19,7 @@ import javafx.scene.control.TextField;
 /**
  * FXML Controller class
  *
- * @author Glenn
+ * @author Glenn, Kristian
  */
 public class LoginToDatabase extends Controller implements Initializable {
 
@@ -54,21 +54,35 @@ public class LoginToDatabase extends Controller implements Initializable {
             boolean isConnected = controller.connectToDB(this.fieldPath.getText(), this.fieldUsername.getText(), this.fieldPassword.getText());
 
             if (!isConnected) {
-                Alert b = new Alert(Alert.AlertType.ERROR);
-                b.setTitle("Wrong input");
-                b.setContentText("Either the username, password, or the database path is invalid!");
-                b.showAndWait();
+                DialogboxError(
+                        "Error", 
+                        "Connection to the Database Failed \n\n"
+                        + "Maybe the username, password, or the database path is invalid!");
             } else {
                 switchSceneToPageplaner();
             }
         } else if (event.getSource() == buttonLoginWithoutDB) {
+            DialogboxError("Warning",
+                    "Warning \n\n"
+                    + "The program will not function as expected without a Database!");
             switchSceneToPageplaner();
         }
     }
     
     private void switchSceneToPageplaner() {
-        this.getPageSwitcher().setSceneFromString(Scenes.PAGEPLANNER);
-        guiMain.Pageplaner layoutController = (guiMain.Pageplaner) this.getPageSwitcher().getController(Scenes.PAGEPLANNER);
+        this.getSceneSwitcher().setSceneFromString(Scenes.PAGEPLANNER);
+        guiMain.Pageplaner layoutController = (guiMain.Pageplaner) this.getSceneSwitcher().getController(Scenes.PAGEPLANNER);
         layoutController.setMediator(controller);
+        
+                
+                
+        
+    }
+    
+    private void DialogboxError(String title, String content) {
+        Alert b = new Alert(Alert.AlertType.ERROR);
+        b.setTitle(title);
+        b.setContentText(content);
+        b.showAndWait();
     }
 }
