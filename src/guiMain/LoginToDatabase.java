@@ -21,7 +21,7 @@ import javafx.scene.control.TextField;
  *
  * @author Glenn
  */
-public class SCENE_CTRL_MainPage extends Controller implements Initializable {
+public class LoginToDatabase extends Controller implements Initializable {
 
     private BusinessController controller;
 
@@ -33,6 +33,8 @@ public class SCENE_CTRL_MainPage extends Controller implements Initializable {
     private Button buttonLogin;
     @FXML
     private TextField fieldPath;
+    @FXML
+    private Button buttonLoginWithoutDB;
 
     /**
      * Initializes the controller class.
@@ -57,11 +59,16 @@ public class SCENE_CTRL_MainPage extends Controller implements Initializable {
                 b.setContentText("Either the username, password, or the database path is invalid!");
                 b.showAndWait();
             } else {
-                this.getPageSwitcher().setSceneFromString(Page.PAGEPLANNER);
-                guiMain.FxmlDataController layoutController = (guiMain.FxmlDataController) this.getPageSwitcher().getController(Page.PAGEPLANNER);
-                layoutController.setMediator(controller);
+                switchSceneToPageplaner();
             }
+        } else if (event.getSource() == buttonLoginWithoutDB) {
+            switchSceneToPageplaner();
         }
     }
-
+    
+    private void switchSceneToPageplaner() {
+        this.getPageSwitcher().setSceneFromString(Scenes.PAGEPLANNER);
+        guiMain.Pageplaner layoutController = (guiMain.Pageplaner) this.getPageSwitcher().getController(Scenes.PAGEPLANNER);
+        layoutController.setMediator(controller);
+    }
 }

@@ -24,21 +24,21 @@ import javafx.stage.Stage;
 public class Launcher extends Application {
 
     private Stage stage;
-    private HashMap<Page, Controller> pages;
+    private HashMap<Scenes, Controller> pages;
     private WidgetSelector widgetSelector;
 
     @Override
     public void start(Stage stage) throws Exception {
         this.pages = new HashMap();
         this.stage = stage;
-        stage.setTitle("Main Page");        
-        stage.setScene(this.loadLayout(Page.MAINPAGE));
+        stage.setTitle("ElectroMOS");        
+        stage.setScene(this.loadLayout(Scenes.LOGINTODB));
         stage.show();
     }
 
-    public void setSceneFromString(Page page) {
+    public void setSceneFromString(Scenes scene) {
         try {
-            stage.setScene(this.loadLayout(page));
+            stage.setScene(this.loadLayout(scene));
             stage.centerOnScreen();
         } catch (IOException ex) {
             System.out.println("Unable to open file");
@@ -46,7 +46,7 @@ public class Launcher extends Application {
         }
     }
 
-    private Scene loadLayout(Page fxmlName) throws IOException {
+    private Scene loadLayout(Scenes fxmlName) throws IOException {
         FXMLLoader loader = new FXMLLoader();
 
         Parent root = loader.load(
@@ -58,10 +58,6 @@ public class Launcher extends Application {
         
         mainCtrl.setPageSwitcher(this);
         Scene scene = new Scene(root);
-        /*
-        PageNavigator.setMainController(mainCtrl);
-        PageNavigator.loadContent(PageNavigator.MAINPAGEFXML);
-         */
         return scene;
     }
 
@@ -80,7 +76,7 @@ public class Launcher extends Application {
      * @param page
      * @return the pages
      */
-    public Controller getController(Page page) {
+    public Controller getController(Scenes page) {
         return pages.get(page);
     }
 }

@@ -9,12 +9,13 @@ package guiMain;
  *
  * @author Glenn
  */
-public enum Page {
-    MAINPAGE("SCENE_FXML_MainPage.fxml"), PAGEPLANNER("FxmlData.fxml");
+public enum Scenes {
+    LOGINTODB("LoginToDatabase.fxml"),
+    PAGEPLANNER("Pageplaner.fxml");
 
     private String pageName;
 
-    private Page(String string) {
+    private Scenes(String string) {
         this.pageName = string;
     }
 
