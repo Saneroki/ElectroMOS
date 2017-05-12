@@ -46,10 +46,6 @@ public class LoginToDatabase extends Controller implements Initializable {
         controller = BusinessController.getBusinessController();
     }
 
-    void setContent(Node node) {
-
-    }
-
     @FXML
     private void buttonListener(ActionEvent event) {
         if (event.getSource() == buttonLogin) {
@@ -67,13 +63,18 @@ public class LoginToDatabase extends Controller implements Initializable {
             alertConfirmation();
         }
     }
+    
     /**
      * Will switch the current Scene to Page planer
      * @autor Kristian
      */
     private void switchSceneToPageplaner() {
+        guiMain.Pageplaner layoutController; 
+        
         this.getSceneSwitcher().setSceneFromString(Scenes.PAGEPLANNER);
-        guiMain.Pageplaner layoutController = (guiMain.Pageplaner) this.getSceneSwitcher().getController(Scenes.PAGEPLANNER);
+        
+        layoutController = (guiMain.Pageplaner) 
+                this.getSceneSwitcher().getController(Scenes.PAGEPLANNER);
         layoutController.setMediator(controller);  
     }
     

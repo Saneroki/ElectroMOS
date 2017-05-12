@@ -40,7 +40,7 @@ public class Product implements Initializable  {
             File file = new File(imgSrc);
             img = new Image(imgSrc, 0, 150, true, false);
         } catch (Exception e) {
-            img = new Image("src.imageNotFound.png");
+            img = new Image("imageNotFound.png");
         }
     }
 
@@ -60,7 +60,7 @@ public class Product implements Initializable  {
         return imgSrc;
     }
     
-        @Override
+    @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     } 

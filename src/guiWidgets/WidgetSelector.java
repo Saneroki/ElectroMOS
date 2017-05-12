@@ -42,7 +42,6 @@ public class WidgetSelector {
         ArrayList<String> returnStrings = new ArrayList();
 
         for (File file : directory.listFiles()) {
-
             String[] extString = file.toString().split("\\.");
             if(extString.length == 0) continue; //if directory
 
@@ -51,7 +50,6 @@ public class WidgetSelector {
                 returnStrings.add(file.getName()); 
             }
         }
-        
         return returnStrings;
     }
 
