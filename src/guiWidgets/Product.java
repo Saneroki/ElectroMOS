@@ -6,13 +6,16 @@
 package guiWidgets;
 
 import java.io.File;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 
 /**
  *
  * @author andt
  */
-public class Product {
+public class Product implements Initializable  {
 
     private String name;
     private int serialNumber;
@@ -56,4 +59,9 @@ public class Product {
     public String getImgSrc() {
         return imgSrc;
     }
+    
+        @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+    } 
 }
