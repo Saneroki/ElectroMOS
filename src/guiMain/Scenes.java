@@ -7,7 +7,7 @@ package guiMain;
 
 /**
  *
- * @author Glenn
+ * @author Kristian
  */
 public enum Scenes {
     LOGINTODB("LoginToDatabase.fxml"),
@@ -19,6 +19,10 @@ public enum Scenes {
         this.pageName = string;
     }
     
+    /**
+     * @author Glenn
+     * @return a fitting name for the Scene
+     */
     public String getSceneTitle(){
         String title = null;
         if (this.pageName.equals(LOGINTODB.toString())) {

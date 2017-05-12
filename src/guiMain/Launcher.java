@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author Glenn
+ * @author Glenn, Kristian
  */
 public class Launcher extends Application {
 
@@ -66,7 +66,7 @@ public class Launcher extends Application {
 
     /**
      * @param sceneController
-     * @return the scene
+     * @return the sceneController
      */
     public Controller getController(Scenes sceneController) {
         return scene.get(sceneController);

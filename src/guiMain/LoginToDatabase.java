@@ -7,6 +7,7 @@ package guiMain;
 
 import business.BusinessController;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 
 /**
@@ -51,38 +53,49 @@ public class LoginToDatabase extends Controller implements Initializable {
     @FXML
     private void buttonListener(ActionEvent event) {
         if (event.getSource() == buttonLogin) {
-            boolean isConnected = controller.connectToDB(this.fieldPath.getText(), this.fieldUsername.getText(), this.fieldPassword.getText());
+            boolean isConnected = controller.connectToDB(
+                    this.fieldPath.getText(), 
+                    this.fieldUsername.getText(), 
+                    this.fieldPassword.getText());
 
             if (!isConnected) {
-                DialogboxError(
-                        "Error", 
-                        "Connection to the Database Failed \n\n"
-                        + "Maybe the username, password, or the database path is invalid!");
+                alertConnectionError();
             } else {
                 switchSceneToPageplaner();
             }
         } else if (event.getSource() == buttonLoginWithoutDB) {
-            DialogboxError("Warning",
-                    "Warning \n\n"
-                    + "The program will not function as expected without a Database!");
-            switchSceneToPageplaner();
+            alertConfirmation();
         }
     }
-    
+    /**
+     * Will switch the current Scene to Page planer
+     * @autor Kristian
+     */
     private void switchSceneToPageplaner() {
         this.getSceneSwitcher().setSceneFromString(Scenes.PAGEPLANNER);
         guiMain.Pageplaner layoutController = (guiMain.Pageplaner) this.getSceneSwitcher().getController(Scenes.PAGEPLANNER);
-        layoutController.setMediator(controller);
-        
-                
-                
-        
+        layoutController.setMediator(controller);  
     }
     
-    private void DialogboxError(String title, String content) {
-        Alert b = new Alert(Alert.AlertType.ERROR);
-        b.setTitle(title);
-        b.setContentText(content);
-        b.showAndWait();
+    private void alertConnectionError(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText("Connection to the Database Failed!");
+        alert.setContentText("Maybe the username, password, or the database path is invalid!");
+        alert.showAndWait();
+    }
+    
+    private void alertConfirmation(){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Warning");
+        alert.setHeaderText("The program will not function as expected without a Database!");
+        alert.setContentText("Are you really sure to use the program without a Database?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            switchSceneToPageplaner();
+        } else {
+            //DoNothing
+        }
     }
 }
