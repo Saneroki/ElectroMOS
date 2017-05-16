@@ -5,14 +5,7 @@
  */
 package business;
 
-import persistence.DBMediator;
 import guiWidgets.Widget;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.scene.Node;
 
 /**
  *

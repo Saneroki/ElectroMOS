@@ -23,6 +23,10 @@ public class Product implements Initializable  {
     private String imgSrc;
     private Image img;
 
+    public Product (){
+        
+    }
+    
     public Product(String name, int serial, double price) {
         this.name = name;
         this.serialNumber = serial;
