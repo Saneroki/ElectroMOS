@@ -6,7 +6,6 @@
 package guiMain;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -32,6 +31,9 @@ public abstract class LayoutSelector extends Stage {
         this.initialize();
     }
 
+    /**
+     * @author Kristian
+     */
     private void initialize() {
         VBox vbox = new VBox();
         AnchorPane pane = new AnchorPane();
@@ -63,9 +65,15 @@ public abstract class LayoutSelector extends Stage {
             onCancel();
         });
     }
-
+    
+    /**
+     * @author Kristian
+     */
     public abstract void onAccept();
 
+    /**
+     * @author Kristian
+     */
     public void onCancel() {
         this.hide();
     }

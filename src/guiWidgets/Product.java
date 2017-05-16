@@ -6,13 +6,16 @@
 package guiWidgets;
 
 import java.io.File;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 
 /**
  *
  * @author andt
  */
-public class Product {
+public class Product implements Initializable  {
 
     private String name;
     private int serialNumber;
@@ -20,6 +23,10 @@ public class Product {
     private String imgSrc;
     private Image img;
 
+    public Product (){
+        
+    }
+    
     public Product(String name, int serial, double price) {
         this.name = name;
         this.serialNumber = serial;
@@ -37,7 +44,7 @@ public class Product {
             File file = new File(imgSrc);
             img = new Image(imgSrc, 0, 150, true, false);
         } catch (Exception e) {
-            img = new Image("src.imageNotFound.png");
+            img = new Image("imageNotFound.png");
         }
     }
 
@@ -56,4 +63,9 @@ public class Product {
     public String getImgSrc() {
         return imgSrc;
     }
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+    } 
 }

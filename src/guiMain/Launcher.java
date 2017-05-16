@@ -14,31 +14,30 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
  *
- * @author Glenn
+ * @author Glenn, Kristian
  */
 public class Launcher extends Application {
 
     private Stage stage;
-    private HashMap<Page, Controller> pages;
+    private HashMap<Scenes, Controller> scene;
     private WidgetSelector widgetSelector;
 
     @Override
     public void start(Stage stage) throws Exception {
-        this.pages = new HashMap();
+        this.scene = new HashMap();
         this.stage = stage;
-        stage.setTitle("Main Page");        
-        stage.setScene(this.loadLayout(Page.MAINPAGE));
+        setSceneFromString(Scenes.LOGINTODB);
         stage.show();
     }
 
-    public void setSceneFromString(Page page) {
+    public void setSceneFromString(Scenes scene) {
         try {
-            stage.setScene(this.loadLayout(page));
+            stage.setScene(this.loadSceneContent(scene));
+            this.changeStageTitle("ElectroMOS - " + scene.getSceneTitle());
             stage.centerOnScreen();
         } catch (IOException ex) {
             System.out.println("Unable to open file");
@@ -46,7 +45,7 @@ public class Launcher extends Application {
         }
     }
 
-    private Scene loadLayout(Page fxmlName) throws IOException {
+    private Scene loadSceneContent(Scenes fxmlName) throws IOException {
         FXMLLoader loader = new FXMLLoader();
 
         Parent root = loader.load(
@@ -54,15 +53,23 @@ public class Launcher extends Application {
         
         Controller mainCtrl = loader.getController();
 
-        this.pages.put(fxmlName, mainCtrl);
+        this.scene.put(fxmlName, mainCtrl);
         
-        mainCtrl.setPageSwitcher(this);
-        Scene scene = new Scene(root);
-        /*
-        PageNavigator.setMainController(mainCtrl);
-        PageNavigator.loadContent(PageNavigator.MAINPAGEFXML);
-         */
-        return scene;
+        mainCtrl.setSceneSwitcher(this);
+        Scene newScene = new Scene(root);
+        return newScene;
+    }
+    
+        public void changeStageTitle(String name) {
+        this.stage.setTitle(name);
+    }
+
+    /**
+     * @param sceneController
+     * @return the sceneController
+     */
+    public Controller getController(Scenes sceneController) {
+        return scene.get(sceneController);
     }
 
     /**
@@ -70,17 +77,5 @@ public class Launcher extends Application {
      */
     public static void main(String[] args) {
         launch(args);
-    }
-
-    public void changeStageTitle(String name) {
-        this.stage.setTitle(name);
-    }
-
-    /**
-     * @param page
-     * @return the pages
-     */
-    public Controller getController(Page page) {
-        return pages.get(page);
     }
 }

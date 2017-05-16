@@ -6,10 +6,6 @@
 package guiMain;
 
 import business.BusinessController;
-import guiMain.Controller;
-import guiMain.DialogCreateLayout;
-import guiMain.LayoutSelector;
-import guiWidgets.Campaign;
 import guiWidgets.Widget;
 import guiWidgets.WidgetSelector;
 import java.io.IOException;
@@ -19,15 +15,10 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -38,9 +29,9 @@ import javafx.scene.layout.Pane;
 
 /**
  *
- * @author Glenn
+ * @author Glenn, Kristian
  */
-public class FxmlDataController extends Controller implements Initializable {
+public class Pageplaner extends Controller implements Initializable {
 
     private BusinessController mediator;
     private LayoutSelector layoutEdit;
@@ -251,14 +242,12 @@ public class FxmlDataController extends Controller implements Initializable {
                 break;
             default:
                 break;
-
-        }
-                 */
+        }*/
 
         try {
             this.placeWidget(box, this.widgetSelector.getWidget(((Widget) box.getValue()).getFxmlName()));
         } catch (IOException ex) {
-            Logger.getLogger(FxmlDataController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Pageplaner.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.out.println("Widget selected: " + box.getValue());
     }
