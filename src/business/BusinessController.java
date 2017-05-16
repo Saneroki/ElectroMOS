@@ -3,16 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Business;
+package business;
 
-import dbcontroller.DBMediator;
 import guiWidgets.Widget;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.scene.Node;
 
 /**
  *
@@ -33,14 +26,15 @@ public class BusinessController {
         return controller;
     }
 
-
-    private Logic logic = new Logic();
+    private Logic logic;
 
     private BusinessController() {
+        logic = new Logic();
     }
 
     public void addWidget(Widget widget, Area area) {
-        logic.addWidgetToPage(widget.getID(), widget.getDBID(), widget.getXPos(), widget.getYPos(), widget.getHeight(), widget.getWidth(), getAreaList(area));
+
+        logic.addWidgetToPage(widget.getID(), widget.getDBID(), widget.getXPos(), widget.getYPos(), widget.getHeight(), widget.getWidth(), widget.getFxmlName(), getAreaList(area));
     }
 
     public void removeWidget(Widget widget) {
@@ -64,6 +58,18 @@ public class BusinessController {
     }
 
     public void acceptLayout(String desc) {
-       logic.addPage(desc);
+        int pageID = logic.getPage(desc);
+        if (pageID == -1) {
+            System.out.println("Page doesn't exists - creates it");
+            pageID = logic.addPage(desc);
+        } else {
+            System.out.println("Page exists - loaded");
+        }
+        
+        logic.updateWidgets(pageID);
+    }
+
+    public boolean connectToDB(String url, String username, String password) {
+        return this.logic.loginToDatabase(url, username, password);
     }
 }

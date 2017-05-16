@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TitledPane?>
+
+<TitledPane animated="false" text="Browse" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="guiWidgets.Browser">
+   <content>
+      <ScrollPane fx:id="ScrollPane" hbarPolicy="NEVER" pannable="true">
+         <content>
+            <ListView />
+         </content>
+      </ScrollPane>
+   </content>
+</TitledPane>

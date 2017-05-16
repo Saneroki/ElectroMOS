@@ -5,31 +5,42 @@
  */
 package guiWidgets;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import guiWidgets.Widget;
-
-
 
 /**
+ * FXML Controller class
  *
  * @author Kristian
  */
-public class Searchbar extends Widget {
+public class Searchbar implements Initializable {
 
     @FXML
     private TextField searchText;
     @FXML
     private Button searchButton;
 
-    public Searchbar(int width, int height, int xPos, int yPos) {
-        super.width = width;
-        super.height = height;
-        super.xPos = xPos;
-        super.yPos = yPos;
+
+    public Searchbar(/*int width, int height, int xPos, int yPos*/) {
+//        super.width = width;
+//        super.height = height;
+//        super.xPos = xPos;
+//        super.yPos = yPos;
     }
+
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+    }    
+
 
     @FXML
     private void searchAction(ActionEvent event) {

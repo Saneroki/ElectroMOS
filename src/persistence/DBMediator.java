@@ -3,22 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dbcontroller;
+package persistence;
 
-import Business.BusinessController.Area;
-import Business.Mediator;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.scene.Node;
 
 /**
  *
  * @author Marcg
  */
-public class DBMediator {
+public final class DBMediator {
 
     private static DBMediator mediator;
 
@@ -32,24 +25,25 @@ public class DBMediator {
     String status;
     ResultSet result;
 
-    private DBMediator() {
-        this.connectToDB("jdbc:postgresql://10.126.115.233:5432/ElectroMOSDB", "postgres", "Npaexmmf226");
+    public boolean connectToDB(String url, String user, String pw) {
+        con = new ConnectionToDB(url, user, pw);
+
+        boolean canConnect = con.connect();
+        System.out.println(canConnect ? "The connection was successfully established!" : "En error occured, trying to connect to the database..");
+        return canConnect;
     }
 
-    public void connectToDB(String url, String user, String pw) {
-        con = new ConnectionToDB(url, user, pw);
-        status = con.connect();
-        System.out.println(status);
+    public boolean hasConnection() {
+        return this.con.con != null;
     }
 
     public void sendData(String string) {
         result = con.sendDBStatement(string);
     }
-    
+
     public void sendUpdate(String string) {
         con.updateDBStatement(string);
     }
-
 
     public void getData() {
 
@@ -61,9 +55,5 @@ public class DBMediator {
 
     public ResultSet getResult() {
         return result;
-    }
-    
-    public static void main(String[] args) {
-        DBMediator databaseMediator = DBMediator.getMediator();
     }
 }

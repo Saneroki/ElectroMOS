@@ -3,32 +3,37 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Business;
-
-import guiWidgets.*;
-import javafx.scene.Node;
+package business;
 
 /**
  *
  * @author andt
  */
-class BusinessWidget{
+class BusinessWidget {
+
     protected int id;
     protected int height;
     protected int width;
     protected int xPos;
     protected int yPos;
-    protected int databaseID;
+    protected int widgetID;
+    private String widgetFxmlName;
 
-    public BusinessWidget(int width, int height, int x, int y, int id, int dbid){
+    public BusinessWidget(int width, int height, int x, int y, int id, int dbid) {
         this.height = height;
         this.width = width;
         this.xPos = x;
         this.yPos = y;
         this.id = id;
-        this.databaseID = dbid;
+        this.widgetID = dbid;
     }
-      
+    
+    public BusinessWidget(int x, int y, String widgetFxmlName) {
+        this.xPos = x;
+        this.yPos = y;
+        this.widgetFxmlName = widgetFxmlName;
+    }
+
     void setHeight(int value) {
         this.height = value;
     }
@@ -60,12 +65,26 @@ class BusinessWidget{
     int getYPos() {
         return yPos;
     }
-    
-    int getID(){
+
+    int getID() {
         return id;
     }
-    
-    int getDBID(){
-        return databaseID;
+
+    int getDBID() {
+        return widgetID;
+    }
+
+    /**
+     * @return the widgetFxmlName
+     */
+    public String getWidgetFxmlName() {
+        return widgetFxmlName;
+    }
+
+    /**
+     * @param widgetFxmlName the widgetFxmlName to set
+     */
+    public void setWidgetFxmlName(String widgetFxmlName) {
+        this.widgetFxmlName = widgetFxmlName;
     }
 }

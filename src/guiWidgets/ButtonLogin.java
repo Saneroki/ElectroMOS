@@ -5,15 +5,25 @@
  */
 package guiWidgets;
 
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 
 /**
  *
  * @author Kristian
  */
-public class ButtonLogin extends Button {
+public class ButtonLogin extends Widget {
     
-    public ButtonLogin() {
-        this.setText("Login");
+    /**
+     *
+     */
+
+    public ButtonLogin(Node node, String name) {
+        super(node, name);
     }
+    
+    /**
+     *
+     */
+    
 }
