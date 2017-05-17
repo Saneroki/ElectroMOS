@@ -8,6 +8,7 @@ package business;
 import persistence.DBMediator;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -85,7 +86,7 @@ class Logic {
             string += ";";
             sendUpdate(string);
         } catch (SQLException e) {
-            System.out.println("Exception:\n"+e);
+            System.out.println("Exception:\n" + e);
         }
     }
 
@@ -103,6 +104,25 @@ class Logic {
             result.next();
             widget.widgetID = result.getInt("id");
         }
+    }
+
+    ArrayList<String> getAllLayouts() {
+        try {
+            ArrayList<String> names = new ArrayList();
+            ResultSet result = sendUpdate("SELECT \"Description\"\n"
+                    + "FROM site;");
+            while(result.next()) {
+                names.add(result.getString(1));
+            }
+            return names;
+        } catch (SQLException ex) {
+            Logger.getLogger(Logic.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    void removePage(int id) {
+        sendUpdate("DELETE FROM site WHERE site_id = "+id+";");
     }
 
     /**
@@ -124,7 +144,7 @@ class Logic {
                 return -1;
             }
             result.next();
-            return result.getInt(1);
+            return result.getInt("site_id");
         } catch (SQLException ex) {
             Logger.getLogger(Logic.class.getName()).log(Level.SEVERE, null, ex);
         }

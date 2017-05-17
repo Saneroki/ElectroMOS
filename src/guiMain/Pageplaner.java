@@ -17,15 +17,25 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.ContextMenuEvent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.util.Pair;
 
 /**
  *
@@ -37,6 +47,7 @@ public class Pageplaner extends Controller implements Initializable {
     private LayoutSelector layoutEdit;
     private LayoutSelector layoutDelete;
     private WidgetSelector widgetSelector;
+    private String currentLayout;
 
     private Label label;
     @FXML
@@ -50,67 +61,102 @@ public class Pageplaner extends Controller implements Initializable {
     @FXML
     private AnchorPane pageFoot;
     @FXML
-    private Pane paneTopLeft;
-    @FXML
-    private Pane PaneTopCenter;
-    @FXML
-    private Pane PaneTopRight;
-    @FXML
-    private AnchorPane pageCenter;
-    @FXML
-    private ChoiceBox<Widget> choiceBoxTop1;
-    @FXML
-    private ChoiceBox<Widget> choiceBoxTop2;
-    @FXML
-    private ChoiceBox<Widget> choiceBoxTop3;
-    @FXML
-    private ChoiceBox<Widget> choiceBoxLeft1;
-    @FXML
-    private ChoiceBox<Widget> choiceBoxLeft2;
-    @FXML
-    private ChoiceBox<Widget> choiceBoxLeft3;
-    @FXML
-    private ChoiceBox<Widget> choiceBoxBottom1;
-    @FXML
-    private ChoiceBox<Widget> choiceBoxBottom3;
-    @FXML
-    private ChoiceBox<Widget> choiceBoxBottom2;
-    @FXML
-    private ChoiceBox<Widget> choiceBoxCenter1;
-    @FXML
-    private ChoiceBox<Widget> choiceBoxCenter2;
-    @FXML
-    private ChoiceBox<Widget> choiceBoxCenter3;
-    @FXML
-    private Button buttonUpdatePreview;
+    private AnchorPane pageMiddle;
     @FXML
     private Button buttonLayoutNew;
     @FXML
     private Button buttonEditLayout;
     @FXML
     private Button buttonLayoutDelete;
+    @FXML
+    private VBox vBoxWidgetsAvailable;
 
     private void handleButtonAction(ActionEvent event) {
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         this.widgetSelector = new WidgetSelector();
-        this.fillChoiceBoxes();
+        
+
+        addAllWidgetsToPane();
+        this.initializePanes();
 
         this.layoutEdit = new LayoutSelector("Select Layout to Edit") {
             @Override
             public void onAccept() {
-
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Unsaved Progress");
+                alert.setContentText("Do you want to save before closing?");
+                alert.showAndWait();
+                if(alert.getResult().getText() == "OK") {
+                    mediator.acceptLayout(currentLayout);
+                }
             }
         };
         this.layoutDelete = new LayoutSelector("Select Layout to Delete") {
             @Override
             public void onAccept() {
-
+                this.hide();
+                mediator.removePage(this.getChosenLayout());
             }
         };
+    }
+
+    private void addAllWidgetsToPane() {
+        for (Widget widget : widgetSelector.getWidgets()) {
+            Button widgetAvailable = new Button(widget.getFxmlName());
+            this.vBoxWidgetsAvailable.getChildren().add(widgetAvailable);
+
+            widget.getNode().setStyle("-fx-border-color:red; -fx-background-color: blue;");
+
+            widgetAvailable.setOnDragDetected((event) -> {
+                Dragboard db = widgetAvailable.startDragAndDrop(TransferMode.ANY);
+                ClipboardContent c = new ClipboardContent();
+                c.putString(widget.getFxmlName());
+                db.setContent(c);
+
+                event.consume();
+            });
+
+        }
+    }
+
+    private void initializePanes() {
+        makeDropAble(pageMiddle);
+        makeDropAble(pageLeft);
+        makeDropAble(pageTop);
+        makeDropAble(pageFoot);
+    }
+
+    private void makeDropAble(AnchorPane pane) {
+        pane.setOnDragOver((event) -> {
+            if (event.getDragboard().hasString()) {
+                event.acceptTransferModes(TransferMode.COPY);
+            }
+
+            event.consume();
+        });
+
+        pane.setOnDragDropped((event) -> {
+            try {
+                Widget widget = widgetSelector.getWidget(event.getDragboard().getString());
+                Node node = widget.getNode();
+                pane.getChildren().add(node);
+                node.setLayoutX(event.getX());
+                node.setLayoutY(event.getY());
+
+                node.setOnContextMenuRequested((onDelete) -> {
+                    ((Pane) node.getParent()).getChildren().remove(node);
+                });
+
+                mediator.addWidget(widget, BusinessController.Area.TOP);
+            } catch (IOException ex) {
+                System.out.println("Widget is unable to be added to page..\n" + ex);
+                Logger.getLogger(Pageplaner.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            event.consume();
+        });
     }
 
     @FXML
@@ -118,12 +164,8 @@ public class Pageplaner extends Controller implements Initializable {
         Button button = (Button) event.getSource();
 
         //Check if preview button and activate
-        if (button == this.buttonUpdatePreview) {
-            this.refreshPreview();
-        }
-
         if (button == this.buttonAccept) {
-            mediator.acceptLayout("FrontPage");
+            mediator.acceptLayout(currentLayout);
         }
 
         if (button == this.buttonEditLayout) {
@@ -135,27 +177,18 @@ public class Pageplaner extends Controller implements Initializable {
         }
 
         if (button == this.buttonLayoutNew) {
-            new DialogCreateLayout().showAndWait();
+            DialogCreateLayout dialog = new DialogCreateLayout();
+            dialog.showAndWait();
+            String result = ((Pair<String, String>)dialog.getResult()).getValue();
+            if(mediator.pageExists(result)) {
+                Alert a = new Alert(Alert.AlertType.WARNING);
+                a.setTitle("Layout Name already exist!");
+                a.setContentText("Do you really want to overwrite?");
+                a.showAndWait();
+                System.out.println(a.getResult());
+            }
+            currentLayout = result;
         }
-    }
-
-    @FXML
-    private void onWidgetSelect(MouseEvent event) {
-    }
-
-    private void fillChoiceBoxes() {
-        giveChoiceBoxAllOptions(this.choiceBoxTop1);
-        giveChoiceBoxAllOptions(this.choiceBoxTop2);
-        giveChoiceBoxAllOptions(this.choiceBoxTop3);
-        giveChoiceBoxAllOptions(this.choiceBoxBottom1);
-        giveChoiceBoxAllOptions(this.choiceBoxBottom2);
-        giveChoiceBoxAllOptions(this.choiceBoxBottom3);
-        giveChoiceBoxAllOptions(this.choiceBoxCenter1);
-        giveChoiceBoxAllOptions(this.choiceBoxCenter2);
-        giveChoiceBoxAllOptions(this.choiceBoxCenter3);
-        giveChoiceBoxAllOptions(this.choiceBoxLeft1);
-        giveChoiceBoxAllOptions(this.choiceBoxLeft2);
-        giveChoiceBoxAllOptions(this.choiceBoxLeft3);
     }
 
     private void giveChoiceBoxAllOptions(ChoiceBox box) {
@@ -199,43 +232,28 @@ public class Pageplaner extends Controller implements Initializable {
             ((Pane) node.getParent()).getChildren().remove(node);
             if (box.getParent() == pageTop) {
                 mediator.removeWidget(widget);
-            } else if (box.getParent() == pageCenter) {
+            } else if (box.getParent() == pageMiddle) {
             } else if (box.getParent() == pageFoot) {
             } else {
             }
         });
-                //        node.setOnContextMenuRequested((event) -> {
-                //            box.setVisible(true);
-                //            ((AnchorPane) node.getParent()).getChildren().remove(node);
-                //            if (box.getParent() == pageTop) {
-                //            } else if (box.getParent() == pageCenter) {
-                //            } else if (box.getParent() == pageFoot) {
-                //            } else {
-                //            }
-                //        });
+        //        node.setOnContextMenuRequested((event) -> {
+        //            box.setVisible(true);
+        //            ((AnchorPane) node.getParent()).getChildren().remove(node);
+        //            if (box.getParent() == pageTop) {
+        //            } else if (box.getParent() == pageCenter) {
+        //            } else if (box.getParent() == pageFoot) {
+        //            } else {
+        //            }
+        //        });
 
-    }
-
-    private void refreshPreview() {
-        this.refreshWidget(this.choiceBoxBottom1);
-        this.refreshWidget(this.choiceBoxBottom2);
-        this.refreshWidget(this.choiceBoxBottom3);
-        this.refreshWidget(this.choiceBoxCenter1);
-        this.refreshWidget(this.choiceBoxCenter2);
-        this.refreshWidget(this.choiceBoxCenter3);
-        this.refreshWidget(this.choiceBoxLeft1);
-        this.refreshWidget(this.choiceBoxLeft2);
-        this.refreshWidget(this.choiceBoxLeft3);
-        this.refreshWidget(this.choiceBoxTop1);
-        this.refreshWidget(this.choiceBoxTop2);
-        this.refreshWidget(this.choiceBoxTop3);
     }
 
     private void refreshWidget(ChoiceBox box) {
         if (box.getValue() == null || !box.isVisible()) {
             return;
         }
-                /*
+        /*
         switch (box.getValue().toString()) {
             case "Insert Searchbar":
                 placeWidget(box, new Searchbar(10, 10));
@@ -264,5 +282,10 @@ public class Pageplaner extends Controller implements Initializable {
      */
     public void setMediator(BusinessController mediator) {
         this.mediator = mediator;
+        ArrayList<String> layouts = mediator.getAllLayouts();
+        
+        this.layoutDelete.setList(layouts);
+        this.layoutEdit.setList(layouts);
     }
+
 }

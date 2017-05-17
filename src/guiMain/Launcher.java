@@ -27,7 +27,7 @@ public class Launcher extends Application {
     private WidgetSelector widgetSelector;
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         this.scene = new HashMap();
         this.stage = stage;
         setSceneFromString(Scenes.LOGINTODB);

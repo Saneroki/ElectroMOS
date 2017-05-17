@@ -6,6 +6,7 @@
 package business;
 
 import guiWidgets.Widget;
+import java.util.ArrayList;
 
 /**
  *
@@ -68,8 +69,22 @@ public class BusinessController {
         
         logic.updateWidgets(pageID);
     }
+    
+    public boolean pageExists(String description) {
+        return logic.getPage(description) != -1;
+    }
 
     public boolean connectToDB(String url, String username, String password) {
         return this.logic.loginToDatabase(url, username, password);
     }
+    
+    public ArrayList<String> getAllLayouts() {
+        return logic.getAllLayouts();
+    }
+    
+    public void removePage(String description) {
+        int id = logic.getPage(description);
+        logic.removePage(id);
+    }
+    
 }
