@@ -6,8 +6,13 @@
 package guiWidgets;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 
@@ -15,7 +20,7 @@ import javafx.scene.image.Image;
  *
  * @author andt
  */
-public class Product implements Initializable  {
+public class Product implements Initializable {
 
     private String name;
     private int serialNumber;
@@ -23,15 +28,11 @@ public class Product implements Initializable  {
     private String imgSrc;
     private Image img;
 
-    public Product (){
-        
-    }
-    
     public Product(String name, int serial, double price) {
         this.name = name;
         this.serialNumber = serial;
         this.price = price;
-        this.imgSrc = "0";
+        this.imgSrc = "src/ImageNotFound.png";
     }
 
     public Product(String name, int serial, double price, String imgSrc) {
@@ -40,11 +41,16 @@ public class Product implements Initializable  {
         this.price = price;
         this.imgSrc = imgSrc;
 
+        Date date = new Date();//test
+        String newline = System.getProperty("line.separator");//test
+        String time = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();//test
+        write("src/fileWrittenToCheck.txt", time + ": product created with image source" + newline);//test
+
         try {
             File file = new File(imgSrc);
             img = new Image(imgSrc, 0, 150, true, false);
         } catch (Exception e) {
-            img = new Image("imageNotFound.png");
+            img = new Image("src/ImageNotFound.png");
         }
     }
 
@@ -64,14 +70,25 @@ public class Product implements Initializable  {
         return imgSrc;
     }
 
-    public Image getImage(){
+    public Image getImage() {
         return img;
     }
 
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    } 
+    }
+
+    private void write(String path, String text) {
+        File fileWrittenToCheck = new File(path);
+        try {
+            FileWriter fileWriter = new FileWriter(path, true);
+            fileWriter.write(text);
+            fileWriter.flush();
+            fileWriter.close();
+        } catch (IOException ex) {
+            Logger.getLogger(Product.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 }

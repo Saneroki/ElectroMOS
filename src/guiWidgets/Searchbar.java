@@ -26,11 +26,8 @@ public class Searchbar implements Initializable {
     private Button searchButton;
 
 
-    public Searchbar(/*int width, int height, int xPos, int yPos*/) {
-//        super.width = width;
-//        super.height = height;
-//        super.xPos = xPos;
-//        super.yPos = yPos;
+    public Searchbar(){
+        
     }
 
     /**
