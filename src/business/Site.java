@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Site {
 
-    private ArrayList<BusinessWidget> widgets;
+    private ArrayList<WidgetRepresentation> widgets;
     private String description;
     private int id;
     
@@ -28,7 +28,7 @@ public class Site {
     /**
      * @return the widgets
      */
-    public ArrayList<BusinessWidget> getWidgets() {
+    public ArrayList<WidgetRepresentation> getWidgets() {
         return widgets;
     }
 
@@ -50,11 +50,11 @@ public class Site {
      *
      * @param widget
      */
-    public void addWidget(BusinessWidget widget) {
+    public void addWidget(WidgetRepresentation widget) {
         widgets.add(widget);
     }
 
-    public void removeWidget(BusinessWidget widget) {
+    public void removeWidget(WidgetRepresentation widget) {
         widgets.remove(widget);
     }
 

@@ -84,6 +84,7 @@ public abstract class LayoutSelector extends Stage {
     }
     
     public void setList(ArrayList<String> string) {
+        choices.getItems().clear();
         choices.getItems().addAll(string);
         choices.getSelectionModel().select(0);
     }
