@@ -66,7 +66,7 @@ public class LoginToDatabase extends Controller implements Initializable {
     
     /**
      * Will switch the current Scene to Page planer
-     * @autor Kristian
+     * @author Kristian
      */
     private void switchSceneToPageplaner() {
         guiMain.Pageplaner layoutController; 

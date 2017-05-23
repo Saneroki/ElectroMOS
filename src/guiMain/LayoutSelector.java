@@ -5,6 +5,10 @@
  */
 package guiMain;
 
+import java.util.ArrayList;
+import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -24,6 +28,7 @@ import javafx.stage.Stage;
 public abstract class LayoutSelector extends Stage {
 
     private Scene scene;
+    private ChoiceBox choices;
 
     public LayoutSelector(String title) {
         this.setTitle(title);
@@ -49,7 +54,7 @@ public abstract class LayoutSelector extends Stage {
         label.setFont(new Font("Arial", 18));
         label.setPadding(new Insets(2, 8, 8, 2));
 
-        ChoiceBox choices = new ChoiceBox();
+        choices = new ChoiceBox();
         choices.setMinSize(280, 32);
         vbox.getChildren().addAll(label, choices, buttonChoices);
         vbox.setMinWidth(300);
@@ -76,5 +81,15 @@ public abstract class LayoutSelector extends Stage {
      */
     public void onCancel() {
         this.hide();
+    }
+    
+    public void setList(ArrayList<String> string) {
+        choices.getItems().clear();
+        choices.getItems().addAll(string);
+        choices.getSelectionModel().select(0);
+    }
+    
+    public String getChosenLayout() {
+        return (String) choices.getSelectionModel().getSelectedItem();
     }
 }

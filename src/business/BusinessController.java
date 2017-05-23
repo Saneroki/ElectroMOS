@@ -6,6 +6,8 @@
 package business;
 
 import guiWidgets.Widget;
+import java.util.ArrayList;
+import persistence.DBMediator;
 
 /**
  *
@@ -14,6 +16,10 @@ import guiWidgets.Widget;
 public class BusinessController {
 
     private static BusinessController controller;
+
+    public void clearRepresentations() {
+        this.widgetHandler.setRepresentations(new ArrayList());
+    }
 
     public enum Area {
         TOP, LEFT, CENTER, BOTTOM;
@@ -26,50 +32,69 @@ public class BusinessController {
         return controller;
     }
 
-    private Logic logic;
+    private DBMediator databaseMediator;
+    private WidgetHandler widgetHandler;
 
     private BusinessController() {
-        logic = new Logic();
+        widgetHandler = new WidgetHandler();   
     }
 
-    public void addWidget(Widget widget, Area area) {
-
-        logic.addWidgetToPage(widget.getID(), widget.getDBID(), widget.getXPos(), widget.getYPos(), widget.getHeight(), widget.getWidth(), widget.getFxmlName(), getAreaList(area));
+    public void addWidget(Widget widget) {
+        widgetHandler.addWidget(widget);
     }
 
     public void removeWidget(Widget widget) {
-        logic.removeWidget(widget.getID());
+        widgetHandler.removeWidget(widget);
     }
-
-    private String getAreaList(Area area) {
-        switch (area) {
-            case BOTTOM:
-                return "bottom";
-            case LEFT:
-                return "left";
-            case CENTER:
-                return "center";
-            case TOP:
-                return "top";
-            default:
-                break;
-        }
-        return null;
+    
+    public int getPageID(String desc) {
+        return databaseMediator.getPage(desc);
     }
 
     public void acceptLayout(String desc) {
-        int pageID = logic.getPage(desc);
+        int pageID = databaseMediator.getPage(desc);
         if (pageID == -1) {
             System.out.println("Page doesn't exists - creates it");
-            pageID = logic.addPage(desc);
+            pageID = databaseMediator.addPage(desc);
         } else {
             System.out.println("Page exists - loaded");
         }
         
-        logic.updateWidgets(pageID);
+        databaseMediator.updateWidgets(pageID, widgetHandler.getRepresentations());
+    }
+    
+    public boolean pageExists(String description) {
+        return databaseMediator.getPage(description) != -1;
     }
 
     public boolean connectToDB(String url, String username, String password) {
-        return this.logic.loginToDatabase(url, username, password);
+        databaseMediator = DBMediator.getMediator(url, username, password);
+        return databaseMediator.hasConnection();
+    }
+    
+    public ArrayList<String> getAllLayouts() {
+        return databaseMediator.getAllLayouts();
+    }
+    
+    public void removePage(String description) {
+        int id = databaseMediator.getPage(description);
+        databaseMediator.removePage(id);
+    }
+    
+    
+    /**
+     * Loads the selected pageID widgets to the WidgetHandler
+     * @param pageID 
+     */
+    public void loadWidgetRepresentation(int pageID) {
+        this.widgetHandler.setRepresentations(this.databaseMediator.getWidgets(pageID));
+    }
+    
+    public ArrayList<WidgetRepresentation> getRepresentations() {
+        return this.widgetHandler.getRepresentations();
+    }
+    
+    public ArrayList<Widget> getWidgets() {
+        return this.widgetHandler.getWidgets();
     }
 }

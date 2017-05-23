@@ -5,6 +5,7 @@
  */
 package guiWidgets;
 
+import business.WidgetRepresentation;
 import java.io.Serializable;
 import javafx.scene.Node;
 
@@ -12,7 +13,7 @@ import javafx.scene.Node;
  *
  * @author andt
  */
-public class Widget implements Serializable {
+public class Widget {
 
     /**
      * @return the local position of x
@@ -134,13 +135,18 @@ public class Widget implements Serializable {
     private Node node;
     private double xPos, yPos, width, height;
     private int ID, DBID;
-    private String fxmlCode;
 
     public Widget(Node node, String name) {
         this.fxmlName = name;
         this.node = node;
     }
 
+    public Widget(WidgetRepresentation repres) {
+        this.fxmlName = repres.getWidgetFxmlName();
+        this.xPos = repres.getXPos();
+        this.yPos = repres.getYPos();
+    }
+    
     /**
      * @return the node
      */
@@ -158,5 +164,17 @@ public class Widget implements Serializable {
     @Override
     public String toString() {
         return "Insert " + getFxmlName().split("\\.")[0];
+    }
+    
+    public void setNode(Node node) {
+        this.node = node;
+    }
+    
+    public double getCurrentX() {
+        return this.xPos;
+    }
+    
+    public double getCurrentY() {
+        return this.yPos;
     }
 }

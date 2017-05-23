@@ -9,17 +9,17 @@ package business;
  *
  * @author andt
  */
-class BusinessWidget {
+public class WidgetRepresentation {
 
     protected int id;
     protected int height;
     protected int width;
     protected int xPos;
     protected int yPos;
-    protected int widgetID;
+    private int widgetID;
     private String widgetFxmlName;
 
-    public BusinessWidget(int width, int height, int x, int y, int id, int dbid) {
+    public WidgetRepresentation(int width, int height, int x, int y, int id, int dbid) {
         this.height = height;
         this.width = width;
         this.xPos = x;
@@ -27,51 +27,51 @@ class BusinessWidget {
         this.id = id;
         this.widgetID = dbid;
     }
-    
-    public BusinessWidget(int x, int y, String widgetFxmlName) {
+
+    public WidgetRepresentation(int x, int y, String widgetFxmlName) {
         this.xPos = x;
         this.yPos = y;
         this.widgetFxmlName = widgetFxmlName;
     }
 
-    void setHeight(int value) {
+    public void setHeight(int value) {
         this.height = value;
     }
 
-    void setWidth(int value) {
+    public void setWidth(int value) {
         this.width = value;
     }
 
-    void setXPos(int value) {
+    public void setXPos(int value) {
         this.xPos = value;
     }
 
-    void setYPos(int value) {
+    public void setYPos(int value) {
         this.yPos = value;
     }
 
-    int getHeight() {
+    public int getHeight() {
         return height;
     }
 
-    int getWidth() {
+    public int getWidth() {
         return width;
     }
 
-    int getXPos() {
+    public int getXPos() {
         return xPos;
     }
 
-    int getYPos() {
+    public int getYPos() {
         return yPos;
     }
 
-    int getID() {
+    public int getID() {
         return id;
     }
 
-    int getDBID() {
-        return widgetID;
+    public int getDBID() {
+        return getWidgetID();
     }
 
     /**
@@ -87,4 +87,24 @@ class BusinessWidget {
     public void setWidgetFxmlName(String widgetFxmlName) {
         this.widgetFxmlName = widgetFxmlName;
     }
+
+    /**
+     * @return the widgetID
+     */
+    public int getWidgetID() {
+        return widgetID;
+    }
+
+    /**
+     * @param widgetID the widgetID to set
+     */
+    public void setWidgetID(int widgetID) {
+        this.widgetID = widgetID;
+    }
+
+    @Override
+    public String toString() {
+        return this.widgetFxmlName;
+    }
+
 }
