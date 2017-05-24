@@ -53,8 +53,16 @@ public class WidgetHandler {
         return widgetsToReturn;
     }
 
+    /**
+     * if widgets == null, then it's cleared.
+     * @param widgets 
+     */
     void setRepresentations(ArrayList<WidgetRepresentation> widgets) {
         this.widgets = new HashMap<>();
+        //clear only if widgets == null
+        if (widgets == null) {
+            return;
+        }
         for (WidgetRepresentation widgetRepresentation : widgets) {
             this.widgets.put(new Widget(widgetRepresentation), widgetRepresentation);
         }

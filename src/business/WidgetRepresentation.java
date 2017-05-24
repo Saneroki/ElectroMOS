@@ -7,7 +7,7 @@ package business;
 
 /**
  *
- * @author andt
+ * @author fanders
  */
 public class WidgetRepresentation {
 

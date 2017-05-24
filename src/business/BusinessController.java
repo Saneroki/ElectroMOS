@@ -7,22 +7,21 @@ package business;
 
 import guiWidgets.Widget;
 import java.util.ArrayList;
+import mediators.BusinessMediator;
+import mediators.DatabaseMediator;
 import persistence.DBMediator;
 
 /**
  *
  * @author Kristian
  */
-public class BusinessController {
+public class BusinessController implements BusinessMediator {
 
     private static BusinessController controller;
 
+    @Override
     public void clearRepresentations() {
-        this.widgetHandler.setRepresentations(new ArrayList());
-    }
-
-    public enum Area {
-        TOP, LEFT, CENTER, BOTTOM;
+        this.widgetHandler.setRepresentations(null);
     }
 
     public static BusinessController getBusinessController() {
@@ -32,25 +31,29 @@ public class BusinessController {
         return controller;
     }
 
-    private DBMediator databaseMediator;
+    private DatabaseMediator databaseMediator;
     private WidgetHandler widgetHandler;
 
     private BusinessController() {
         widgetHandler = new WidgetHandler();   
     }
 
+    @Override
     public void addWidget(Widget widget) {
         widgetHandler.addWidget(widget);
     }
 
+    @Override
     public void removeWidget(Widget widget) {
         widgetHandler.removeWidget(widget);
     }
     
+    @Override
     public int getPageID(String desc) {
         return databaseMediator.getPage(desc);
     }
 
+    @Override
     public void acceptLayout(String desc) {
         int pageID = databaseMediator.getPage(desc);
         if (pageID == -1) {
@@ -63,19 +66,23 @@ public class BusinessController {
         databaseMediator.updateWidgets(pageID, widgetHandler.getRepresentations());
     }
     
+    @Override
     public boolean pageExists(String description) {
         return databaseMediator.getPage(description) != -1;
     }
 
+    @Override
     public boolean connectToDB(String url, String username, String password) {
         databaseMediator = DBMediator.getMediator(url, username, password);
         return databaseMediator.hasConnection();
     }
     
+    @Override
     public ArrayList<String> getAllLayouts() {
         return databaseMediator.getAllLayouts();
     }
     
+    @Override
     public void removePage(String description) {
         int id = databaseMediator.getPage(description);
         databaseMediator.removePage(id);
@@ -86,14 +93,17 @@ public class BusinessController {
      * Loads the selected pageID widgets to the WidgetHandler
      * @param pageID 
      */
+    @Override
     public void loadWidgetRepresentation(int pageID) {
         this.widgetHandler.setRepresentations(this.databaseMediator.getWidgets(pageID));
     }
     
+    @Override
     public ArrayList<WidgetRepresentation> getRepresentations() {
         return this.widgetHandler.getRepresentations();
     }
     
+    @Override
     public ArrayList<Widget> getWidgets() {
         return this.widgetHandler.getWidgets();
     }

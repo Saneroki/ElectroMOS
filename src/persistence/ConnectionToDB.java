@@ -6,7 +6,6 @@
 package persistence;
 
 import java.sql.*;
-import java.util.logging.*;
 
 // java -cp postgresql-9.4-1201.jdbc4.jar:. DBtest
 public class ConnectionToDB {
