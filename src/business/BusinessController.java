@@ -35,7 +35,7 @@ public class BusinessController implements BusinessMediator {
     private WidgetHandler widgetHandler;
 
     private BusinessController() {
-        widgetHandler = new WidgetHandler();   
+        widgetHandler = new WidgetHandler();
     }
 
     @Override
@@ -47,7 +47,7 @@ public class BusinessController implements BusinessMediator {
     public void removeWidget(Widget widget) {
         widgetHandler.removeWidget(widget);
     }
-    
+
     @Override
     public int getPageID(String desc) {
         return databaseMediator.getPage(desc);
@@ -62,10 +62,10 @@ public class BusinessController implements BusinessMediator {
         } else {
             System.out.println("Page exists - loaded");
         }
-        
+
         databaseMediator.updateWidgets(pageID, widgetHandler.getRepresentations());
     }
-    
+
     @Override
     public boolean pageExists(String description) {
         return databaseMediator.getPage(description) != -1;
@@ -76,33 +76,33 @@ public class BusinessController implements BusinessMediator {
         databaseMediator = DBMediator.getMediator(url, username, password);
         return databaseMediator.hasConnection();
     }
-    
+
     @Override
     public ArrayList<String> getAllLayouts() {
         return databaseMediator.getAllLayouts();
     }
-    
+
     @Override
     public void removePage(String description) {
         int id = databaseMediator.getPage(description);
         databaseMediator.removePage(id);
     }
-    
-    
+
     /**
      * Loads the selected pageID widgets to the WidgetHandler
-     * @param pageID 
+     *
+     * @param pageID
      */
     @Override
     public void loadWidgetRepresentation(int pageID) {
         this.widgetHandler.setRepresentations(this.databaseMediator.getWidgets(pageID));
     }
-    
+
     @Override
     public ArrayList<WidgetRepresentation> getRepresentations() {
         return this.widgetHandler.getRepresentations();
     }
-    
+
     @Override
     public ArrayList<Widget> getWidgets() {
         return this.widgetHandler.getWidgets();

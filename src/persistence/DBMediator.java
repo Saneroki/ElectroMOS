@@ -32,6 +32,8 @@ public final class DBMediator implements DatabaseMediator {
             if (!mediator.connectToDB(url, user, pw)) {
                 mediator = null;
                 return null;
+            } else {
+                mediator.logic = new Logic(mediator.con);
             }
         }
         return mediator;
@@ -42,7 +44,6 @@ public final class DBMediator implements DatabaseMediator {
     private Logic logic;
 
     private DBMediator() {
-        logic = new Logic(this);
     }
 
     private boolean connectToDB(String url, String user, String pw) {
@@ -56,14 +57,6 @@ public final class DBMediator implements DatabaseMediator {
     @Override
     public boolean hasConnection() {
         return this.con.con != null;
-    }
-
-    public void sendData(String string) {
-        result = con.sendDBStatement(string);
-    }
-
-    public void sendUpdate(String string) {
-        con.updateDBStatement(string);
     }
 
     public void getData() {

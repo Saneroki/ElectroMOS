@@ -18,12 +18,12 @@ public enum Scenes {
     private Scenes(String string) {
         this.pageName = string;
     }
-    
+
     /**
      * @author Glenn
      * @return a fitting name for the Scene
      */
-    public String getSceneTitle(){
+    public String getSceneTitle() {
         String title = null;
         if (this.pageName.equals(LOGINTODB.toString())) {
             title = "Login";
