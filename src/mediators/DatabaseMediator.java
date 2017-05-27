@@ -19,4 +19,5 @@ public interface DatabaseMediator {
     public ArrayList<WidgetRepresentation> getWidgets(int pageID);
     public ArrayList<String> getAllLayouts();
     public void removePage(int id);
+    public boolean hasConnection();
 }

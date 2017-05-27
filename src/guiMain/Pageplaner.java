@@ -32,6 +32,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Pair;
+import mediators.BusinessMediator;
 
 /**
  *
@@ -39,7 +40,7 @@ import javafx.util.Pair;
  */
 public class Pageplaner extends Controller implements Initializable {
 
-    private BusinessController mediator;
+    private BusinessMediator mediator;
     private LayoutSelector layoutEdit;
     private LayoutSelector layoutDelete;
     private WidgetSelector widgetSelector;
@@ -293,7 +294,7 @@ public class Pageplaner extends Controller implements Initializable {
     /**
      * @return the mediator
      */
-    public BusinessController getMediator() {
+    public BusinessMediator getMediator() {
         return mediator;
     }
 

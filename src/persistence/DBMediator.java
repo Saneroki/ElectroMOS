@@ -20,15 +20,21 @@ public final class DBMediator implements DatabaseMediator {
 
     /**
      * Returns null, if no connection can be found.
+     *
      * @param url
      * @param user
      * @param pw
-     * @return 
+     * @return
      */
     public static DBMediator getMediator(String url, String user, String pw) {
         if (mediator == null) {
             mediator = new DBMediator();
-            if(!mediator.connectToDB(url, user, pw)) return null;
+            if (!mediator.connectToDB(url, user, pw)) {
+                mediator = null;
+                return null;
+            } else {
+                mediator.logic = new Logic(mediator.con);
+            }
         }
         return mediator;
     }
@@ -36,9 +42,8 @@ public final class DBMediator implements DatabaseMediator {
     String status;
     ResultSet result;
     private Logic logic;
-    
+
     private DBMediator() {
-        logic = new Logic(this);
     }
 
     private boolean connectToDB(String url, String user, String pw) {
@@ -49,16 +54,9 @@ public final class DBMediator implements DatabaseMediator {
         return canConnect;
     }
 
+    @Override
     public boolean hasConnection() {
         return this.con.con != null;
-    }
-
-    public void sendData(String string) {
-        result = con.sendDBStatement(string);
-    }
-
-    public void sendUpdate(String string) {
-        con.updateDBStatement(string);
     }
 
     public void getData() {
@@ -95,7 +93,7 @@ public final class DBMediator implements DatabaseMediator {
 
     @Override
     public boolean updateWidgets(int pageID, ArrayList<WidgetRepresentation> representations) {
-         return logic.updateWidgets(pageID, representations);
+        return logic.updateWidgets(pageID, representations);
     }
 
     @Override

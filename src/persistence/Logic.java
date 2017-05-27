@@ -20,24 +20,11 @@ import java.util.logging.Logger;
  */
 class Logic {
 
-    DBMediator dB;
+    ConnectionToDB dB;
     private ArrayList<WidgetRepresentation> widgets;
 
-    Logic(DBMediator dB) {
+    Logic(ConnectionToDB dB) {
         this.dB = dB;
-    }
-
-    /**
-     * Returns whether or not it was successful
-     *
-     * @param url
-     * @param username
-     * @param password
-     * @return
-     */
-    boolean loginToDatabase(String url, String username, String password) {
-        dB = DBMediator.getMediator(url, username, password);
-        return dB.hasConnection();
     }
 
     int addPage(String description) {

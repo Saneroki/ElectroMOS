@@ -76,15 +76,4 @@ public class WidgetSelector {
     public ArrayList<Widget> getWidgets() {
         return widgets;
     }
-
-    /*
-    public Widget getWidget(String name) {
-        for(Widget widget : widgets) {
-            if(name == null ? widget.getFxmlName() == null : name.equals(widget.getFxmlName())) {
-                return widget;
-            }
-        }
-        return null;
-    }
-     */
 }

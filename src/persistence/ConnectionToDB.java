@@ -6,13 +6,12 @@
 package persistence;
 
 import java.sql.*;
-import java.util.logging.*;
 
 // java -cp postgresql-9.4-1201.jdbc4.jar:. DBtest
 public class ConnectionToDB {
 
     Connection con = null;
-    ResultSet result = null;
+    private ResultSet result = null;
     String url = null;
     String user = null;
     String password = null;
@@ -63,7 +62,7 @@ public class ConnectionToDB {
         }
     }
 
-    protected ResultSet sendDBStatement(String statement) {
+    protected ResultSet sendData(String statement) {
         PreparedStatement prepStat = null;
         try {
             prepStat = con.prepareStatement(statement);
@@ -71,8 +70,7 @@ public class ConnectionToDB {
         } catch (SQLException e) {
             System.out.println("error occured: " + e);
         }
-
-        return result;
+        return getResult();
     }
 
     protected void updateDBStatement(String statement) {
@@ -83,5 +81,12 @@ public class ConnectionToDB {
             stmt.close();
         } catch (SQLException e) {
         }
+    }
+
+    /**
+     * @return the result
+     */
+    public ResultSet getResult() {
+        return result;
     }
 }
